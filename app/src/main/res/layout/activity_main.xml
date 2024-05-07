@@ -1,0 +1,33 @@
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Photo Upload Button -->
+    <Button
+        android:id="@+id/button_upload_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Photo" />
+
+    <!-- Real-time Scanner Placeholder -->
+    <FrameLayout
+        android:id="@+id/real_time_scanner_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray">
+    </FrameLayout>
+
+    <!-- Settings Button -->
+    <ImageButton
+        android:id="@+id/button_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:layout_gravity="end"
+        android:contentDescription="Settings"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
+</LinearLayout>
