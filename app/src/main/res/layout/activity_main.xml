@@ -1,25 +1,18 @@
 <!-- res/layout/activity_main.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- Photo Upload Button -->
+    <!-- Picture Upload Button -->
     <Button
-        android:id="@+id/button_upload_photo"
-        android:layout_width="match_parent"
+        android:id="@+id/button_upload_picture"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Photo" />
-
-    <!-- Real-time Scanner Placeholder -->
-    <FrameLayout
-        android:id="@+id/real_time_scanner_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/darker_gray">
-    </FrameLayout>
+        android:text="Upload Picture"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp" />
 
     <!-- Settings Button -->
     <ImageButton
@@ -27,7 +20,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_preferences"
-        android:layout_gravity="end"
-        android:contentDescription="Settings"
-        android:background="?android:attr/selectableItemBackgroundBorderless" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Settings" />
+
+    <!-- Food Suggestion List Button -->
+    <Button
+        android:id="@+id/button_food_suggestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Suggestions"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>
