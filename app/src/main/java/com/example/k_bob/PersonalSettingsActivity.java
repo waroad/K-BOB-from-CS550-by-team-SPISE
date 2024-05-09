@@ -80,8 +80,14 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = preferences.edit();
         SharedPreferences.Editor allProfilesEditor = allProfilesPrefs.edit();
 
-        // Update name and other preferences for the active profile
+        // Retrieve new profile name input
         String newProfileName = nameInput.getText().toString().trim();
+        if (newProfileName.isEmpty()) {
+            Toast.makeText(this, "Profile name cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Update name and other preferences for the active profile
         allProfilesEditor.putString(activeProfileId + "_name", newProfileName);
 
         prefsEditor.putBoolean(activeProfileId + "_avoid_beef", checkBeef.isChecked());
@@ -99,7 +105,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         prefsEditor.apply();
         allProfilesEditor.apply();
 
-        // Show a success message and return to the previous screen
+        // Show a success message and finish
         Toast.makeText(this, "Profile successfully updated", Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -1,4 +1,5 @@
 package com.example.k_bob;// ManageProfileActivity.java
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class ManageProfileActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "profiles_preferences";
     private static final String ACTIVE_PROFILE = "active_profile";
     private Button addProfileButton;
+    private String currentProfileId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +43,15 @@ public class ManageProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Retrieve existing profiles
+        // Retrieve the current active profile
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        currentProfileId = preferences.getString(ACTIVE_PROFILE, "");
+
+        // Retrieve existing profiles and update the list
         profiles = getProfilesList();
         updateProfileList();
     }
 
-    // Refresh the profiles list when resuming activity
     @Override
     protected void onResume() {
         super.onResume();
@@ -53,7 +59,6 @@ public class ManageProfileActivity extends AppCompatActivity {
         updateProfileList();
     }
 
-    // Retrieve all profiles
     private List<Profile> getProfilesList() {
         List<Profile> profiles = new ArrayList<>();
         SharedPreferences allProfilesPrefs = getSharedPreferences(ALL_PROFILES_PREFS, MODE_PRIVATE);
@@ -68,7 +73,6 @@ public class ManageProfileActivity extends AppCompatActivity {
         return profiles;
     }
 
-    // Update the ListView with the latest profiles
     private void updateProfileList() {
         List<String> profileNames = new ArrayList<>();
         for (Profile profile : profiles) {
@@ -78,14 +82,72 @@ public class ManageProfileActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, profileNames);
         listViewProfiles.setAdapter(adapter);
 
-        // Handle clicking on an existing profile to switch to it
+        // Handle long click for deleting a profile
+        listViewProfiles.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Profile selectedProfile = profiles.get(position);
+                confirmDeleteProfile(selectedProfile);
+                return true;
+            }
+        });
         listViewProfiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Profile selectedProfile = profiles.get(position);
                 switchToProfile(selectedProfile);
+                finish(); // Return to the ManageProfileActivity
             }
         });
+    }
+
+    // Confirm profile deletion
+    private void confirmDeleteProfile(final Profile profile) {
+        if (profile.getId().equals(currentProfileId)) {
+            // Prevent deleting the active profile
+            Toast.makeText(this, "Cannot delete the currently active profile.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Show confirmation dialog
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Profile")
+                .setMessage("Are you sure you want to delete this profile?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteProfile(profile);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    // Delete the profile and update the list
+    private void deleteProfile(Profile profile) {
+        SharedPreferences allProfilesPrefs = getSharedPreferences(ALL_PROFILES_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor allProfilesEditor = allProfilesPrefs.edit();
+        allProfilesEditor.remove(profile.getId() + "_name");
+        allProfilesEditor.apply();
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = preferences.edit();
+        prefsEditor.remove(profile.getId() + "_avoid_beef");
+        prefsEditor.remove(profile.getId() + "_avoid_pork");
+        prefsEditor.remove(profile.getId() + "_avoid_shellfish");
+        prefsEditor.remove(profile.getId() + "_avoid_fish");
+        prefsEditor.remove(profile.getId() + "_avoid_peanut");
+        prefsEditor.remove(profile.getId() + "_avoid_chicken");
+        prefsEditor.remove(profile.getId() + "_avoid_lamb");
+        prefsEditor.remove(profile.getId() + "_avoid_egg");
+        prefsEditor.remove(profile.getId() + "_avoid_dairy");
+        prefsEditor.remove(profile.getId() + "_avoid_flour");
+        prefsEditor.apply();
+
+        profiles = getProfilesList(); // Refresh profiles list
+        updateProfileList(); // Update ListView
+
+        Toast.makeText(this, "Profile deleted successfully.", Toast.LENGTH_SHORT).show();
     }
 
     // Switch to the specified profile by storing the active profile's ID
