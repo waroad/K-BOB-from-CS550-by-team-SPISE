@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">K-BOB</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">다음</string>
+    <string name="previous">이전</string>
+    <string name="title_activity_personal_settings">PersonalSettingsActivity</string>
+    <string name="title_activity_personal_settings_activity.java">PersonalSettingsActivity.java
+    </string>
+    <string name="manage_profile">프로필 관리</string>
+    <string name="personal_settings">개인 설정</string>
+    <string name="enable_dark_mode">다크 모드 활성화</string>
+    <string name="change_language">언어 변경</string>
+    <string name="current_profile">현재 프로필: %1$s</string>
+    <string name="food_suggestions">음식 추천</string>
+    <string name="upload_picture">사진 업로드</string>
+</resources>

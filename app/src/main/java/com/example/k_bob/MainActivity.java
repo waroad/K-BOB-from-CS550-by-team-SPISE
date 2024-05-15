@@ -1,5 +1,6 @@
 package com.example.k_bob;// MainActivity.java
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -8,15 +9,30 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
+    private static final String PREFS_NAME = "profiles_preferences";
+    private static final String DARK_MODE_PREF = "dark_mode";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+        LocaleHelper.loadLocale(this);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isDarkMode = preferences.getBoolean(DARK_MODE_PREF, false);
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         // Initialize the upload button and set up gallery intent
         Button uploadPictureButton = findViewById(R.id.button_upload_picture);
         uploadPictureButton.setOnClickListener(new View.OnClickListener() {

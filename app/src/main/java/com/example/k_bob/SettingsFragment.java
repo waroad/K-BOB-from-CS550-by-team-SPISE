@@ -1,6 +1,7 @@
 package com.example.k_bob;
 
 // SettingsFragment.java
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,13 +13,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+
+import org.intellij.lang.annotations.Language;
 
 public class SettingsFragment extends Fragment {
     private static final String PREFS_NAME = "profiles_preferences";
     private static final String ALL_PROFILES_PREFS = "all_profiles";
     private static final String ACTIVE_PROFILE = "active_profile";
+    private static final String DARK_MODE_PREF = "dark_mode";
     private TextView profileNameText;
+    private static final String PREFS_NAME1 = "language_preferences";
+    private static final String LANGUAGE_KEY = "language";
+
 
     @Nullable
     @Override
@@ -66,7 +74,17 @@ public class SettingsFragment extends Fragment {
         darkModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toggle dark mode functionality (simple placeholder)
+                // Toggle dark mode functionality
+                boolean isDarkMode = preferences.getBoolean(DARK_MODE_PREF, false);
+                SharedPreferences.Editor editor = preferences.edit();
+                if (isDarkMode) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putBoolean(DARK_MODE_PREF, false);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putBoolean(DARK_MODE_PREF, true);
+                }
+                editor.apply();
             }
         });
 
@@ -74,11 +92,23 @@ public class SettingsFragment extends Fragment {
         languageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle language switching logic
+                toggleLanguage();
             }
         });
 
         return view;
+    }
+    private void toggleLanguage() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREFS_NAME1, Context.MODE_PRIVATE);
+        String currentLanguage = preferences.getString(LANGUAGE_KEY, "en"); // Default to English
+        String newLanguage = currentLanguage.equals("en") ? "ko" : "en"; // Toggle between English and Korean
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(LANGUAGE_KEY, newLanguage);
+        editor.apply();
+
+        LocaleHelper.setLocale(getActivity(), newLanguage);
+        getActivity().recreate(); // Recreate the current activity to reflect the language change
     }
     @Override
     public void onResume() {
@@ -90,6 +120,7 @@ public class SettingsFragment extends Fragment {
         String currentProfileName = allProfilesPrefs.getString(activeProfileId + "_name", "No Profile Selected");
 
         // Update profile name text view
-        profileNameText.setText("Current Profile: " + currentProfileName);
+        String currentProfileText = getString(R.string.current_profile, currentProfileName);
+        profileNameText.setText(currentProfileText);
     }
 }
