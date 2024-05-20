@@ -3,12 +3,16 @@ package com.example.k_bob;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FoodSuggestionActivity extends AppCompatActivity {
+
     private static final String[] foodNames = {
             "Pizza", "Burger", "Sushi", "Pasta", "Salad", "Ramen", "Tacos", "Steak", "Falafel",
             "Curry", "Dumplings", "Paella", "Burrito", "Bagel", "Pho", "Shawarma", "Samosa",
@@ -20,22 +24,30 @@ public class FoodSuggestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_suggestion);
 
-        // Initialize the ListView with an adapter
-        ListView foodListView = findViewById(R.id.list_food_suggestions);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, foodNames);
-        foodListView.setAdapter(adapter);
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish());
 
-        // Set an item click listener to navigate to the food information screen
-        foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedFood = foodNames[position];
-                Intent intent = new Intent(FoodSuggestionActivity.this, FoodInformationActivity.class);
-                intent.putExtra("foodName", selectedFood);
-                // Add corresponding image resources if needed
-                startActivity(intent);
-            }
-        });
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        List<FoodItem> foodItemList = new ArrayList<>();
+        for (String foodName : foodNames) {
+            int imageResId = getFoodImageResourceId(foodName);
+            foodItemList.add(new FoodItem(foodName, imageResId));
+        }
+
+        FoodListAdapter adapter = new FoodListAdapter(foodItemList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private int getFoodImageResourceId(String foodName) {
+        // Replace with actual logic to get image resource ID based on food name
+        switch (foodName) {
+            case "Pizza":
+                return R.drawable.pizza;
+            default:
+                return R.drawable.default_food; // default image if no match is found
+        }
     }
 }
