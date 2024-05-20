@@ -28,6 +28,9 @@
             android:name=".PersonalSettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".FoodInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".FoodSuggestionActivity"
             android:exported="false"
             android:theme="@style/Theme.KBOB" />
