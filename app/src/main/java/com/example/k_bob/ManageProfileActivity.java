@@ -3,6 +3,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,8 +39,14 @@ public class ManageProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start AddProfileActivity to create a new profile
-                Intent intent = new Intent(ManageProfileActivity.this, AddProfileActivity.class);
-                startActivity(intent);
+                Log.d("tttttt", "dd"+profiles.size());
+                if (profiles.size() <=4) {
+                    Intent intent = new Intent(ManageProfileActivity.this, AddProfileActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(ManageProfileActivity.this, "Cannot create more than 5 profiles", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

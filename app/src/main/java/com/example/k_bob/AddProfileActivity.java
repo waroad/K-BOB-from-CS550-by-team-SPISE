@@ -83,6 +83,7 @@ public class AddProfileActivity extends AppCompatActivity {
         prefsEditor.apply();
         // Show a success message and finish
         Toast.makeText(this, "Profile added and switched successfully", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish(); // Return to the ManageProfileActivity
     }
 }

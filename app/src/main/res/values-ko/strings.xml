@@ -13,4 +13,7 @@
     <string name="current_profile">현재 프로필: %1$s</string>
     <string name="food_suggestions">음식 추천</string>
     <string name="upload_picture">사진 업로드</string>
+    <string name="add_profile">프로필 추가</string>
+    <string name="save_settings">저장</string>
+    <string name="preferences">제한되는 음식물</string>
 </resources>

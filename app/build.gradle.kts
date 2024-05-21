@@ -48,7 +48,9 @@ android {
 }
 
 dependencies {
-
+    implementation("androidx.appcompat:appcompat:1.4.0")  // Ensure using the latest version
+    implementation("com.google.android.material:material:1.4.0")  // Material Components
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")  // ConstraintLayout
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

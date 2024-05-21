@@ -13,4 +13,7 @@
     <string name="current_profile">Current Profile: %1$s</string>
     <string name="food_suggestions">Food Suggestions</string>
     <string name="upload_picture">Upload Picture</string>
+    <string name="add_profile">Add Profile</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="preferences">Dietary Restrictions</string>
 </resources>

@@ -6,7 +6,7 @@
     tools:context=".MainActivity">
 
     <!-- Picture Upload Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_upload_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,23 +14,24 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        style="@style/FancyButton" />
 
     <!-- Settings Button -->
     <ImageButton
         android:id="@+id/button_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_preferences"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Settings" />
+        android:contentDescription="Settings"
+        android:src="@drawable/menu" />
 
     <!-- Food Suggestion List Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_food_suggestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        style="@style/FancyButton" />
 
     <FrameLayout
         android:id="@+id/fragment_container"

@@ -5,50 +5,57 @@
     android:background="?android:attr/windowBackground">
 
     <!-- Manage Profile Button -->
-    <Button
-        android:id="@+id/button_manage_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/manage_profile"
-        android:layout_alignParentTop="true" />
 
     <!-- Personal Settings Button -->
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_manage_profile"
+        style="@style/FancyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_current_profile_name"
+        android:layout_marginTop="25dp"
+        android:text="@string/manage_profile" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_personal_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/personal_settings"
         android:layout_below="@+id/button_manage_profile"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="3dp"
+        style="@style/FancyButton" />
 
     <!-- Enable Dark Mode Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_dark_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/enable_dark_mode"
         android:layout_below="@+id/button_personal_settings"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="3dp"
+        style="@style/FancyButton" />
 
     <!-- Change Language Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/change_language"
         android:layout_below="@+id/button_dark_mode"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="3dp"
+        style="@style/FancyButton" />
 
     <!-- Profile Name Text View -->
     <TextView
         android:id="@+id/text_current_profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/current_profile"
-        android:layout_below="@+id/button_language"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="14sp"
-        android:textColor="@color/text_color_primary" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/current_profile"
+        android:textColor="@color/text_color_primary"
+        android:textSize="20sp" />
 </RelativeLayout>

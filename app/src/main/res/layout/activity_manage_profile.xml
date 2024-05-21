@@ -15,10 +15,11 @@
         android:divider="@android:color/darker_gray" />
 
     <!-- Button to add a new profile -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_add_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Profile"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="@string/add_profile"
+        style="@style/FancyButton" />
 </LinearLayout>
