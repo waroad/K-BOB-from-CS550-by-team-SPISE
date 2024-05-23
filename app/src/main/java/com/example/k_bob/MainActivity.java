@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openProfileManagement() {
-        Intent intent = new Intent(this, AddProfileActivity.class);
+        Intent intent = new Intent(this, PersonalSettingsActivity.class);
+        intent.putExtra("add","True");
         startActivityForResult(intent, REQUEST_CODE_ADD_PROFILE);  // Define REQUEST_CODE_ADD_PROFILE as a constant
     }
 

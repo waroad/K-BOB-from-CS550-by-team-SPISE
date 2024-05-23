@@ -15,5 +15,13 @@
     <string name="upload_picture">Upload Picture</string>
     <string name="add_profile">Add Profile</string>
     <string name="save_settings">Save Settings</string>
-    <string name="preferences">Dietary Restrictions</string>
+    <string name="dietary_restrictions">Dietary Restrictions</string>
+    <string name="vegan_type">Vegan Type</string>
+    <string name="name">Name</string>
+    <string name="vegan">Vegan</string>
+    <string name="lacto">Lacto vegetarianism</string>
+    <string name="ovo">Ovo vegetarianism</string>
+    <string name="lacto_ovo">Lacto-ovo vegetarianism</string>
+    <string name="pollotarian">Pollotarian</string>
+    <string name="pescatarian">Pescatarian</string>
 </resources>

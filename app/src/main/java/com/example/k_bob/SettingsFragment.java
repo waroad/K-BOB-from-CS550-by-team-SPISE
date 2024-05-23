@@ -66,6 +66,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 // Navigate to the PersonalSettingsActivity
                 Intent intent = new Intent(getActivity(), PersonalSettingsActivity.class);
+                intent.putExtra("add", "False");
                 startActivity(intent);
             }
         });

@@ -41,7 +41,8 @@ public class ManageProfileActivity extends AppCompatActivity {
                 // Start AddProfileActivity to create a new profile
                 Log.d("tttttt", "dd"+profiles.size());
                 if (profiles.size() <=4) {
-                    Intent intent = new Intent(ManageProfileActivity.this, AddProfileActivity.class);
+                    Intent intent = new Intent(ManageProfileActivity.this, PersonalSettingsActivity.class);
+                    intent.putExtra("add", "True");
                     startActivity(intent);
                 }
                 else{
@@ -62,6 +63,8 @@ public class ManageProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        currentProfileId = preferences.getString(ACTIVE_PROFILE, "");
         profiles = getProfilesList();
         updateProfileList();
     }
@@ -149,6 +152,22 @@ public class ManageProfileActivity extends AppCompatActivity {
         prefsEditor.remove(profile.getId() + "_avoid_egg");
         prefsEditor.remove(profile.getId() + "_avoid_dairy");
         prefsEditor.remove(profile.getId() + "_avoid_flour");
+        prefsEditor.remove(profile.getId() + "_is_vegan");
+        prefsEditor.remove(profile.getId() + "_is_lacto");
+        prefsEditor.remove(profile.getId() + "_is_ovo");
+        prefsEditor.remove(profile.getId() + "_is_lacto-ovo");
+        prefsEditor.remove(profile.getId() + "_is_pollotarian");
+        prefsEditor.remove(profile.getId() + "_is_pescatarian");
+        prefsEditor.remove(profile.getId() + "_avoid_tree_nuts");
+        prefsEditor.remove(profile.getId() + "_avoid_soy");
+        prefsEditor.remove(profile.getId() + "_avoid_sesame");
+        prefsEditor.remove(profile.getId() + "_avoid_wheat");
+        prefsEditor.remove(profile.getId() + "_avoid_corn");
+        prefsEditor.remove(profile.getId() + "_avoid_gluten");
+        prefsEditor.remove(profile.getId() + "_avoid_mustard");
+        prefsEditor.remove(profile.getId() + "_avoid_celery");
+        prefsEditor.remove(profile.getId() + "_avoid_sulfites");
+        prefsEditor.remove(profile.getId() + "_avoid_lupin");
         prefsEditor.apply();
 
         profiles = getProfilesList(); // Refresh profiles list

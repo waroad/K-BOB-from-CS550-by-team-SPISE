@@ -15,5 +15,13 @@
     <string name="upload_picture">사진 업로드</string>
     <string name="add_profile">프로필 추가</string>
     <string name="save_settings">저장</string>
-    <string name="preferences">제한되는 음식물</string>
+    <string name="dietary_restrictions">제한되는 음식물</string>
+    <string name="vegan_type">비건 타입</string>
+    <string name="name">이름</string>
+    <string name="vegan">비건</string>
+    <string name="lacto">락토</string>
+    <string name="ovo">오보</string>
+    <string name="lacto_ovo">락토-오보</string>
+    <string name="pollotarian">폴로</string>
+    <string name="pescatarian">페스코</string>
 </resources>
