@@ -9,7 +9,7 @@
     <string name="manage_profile">Manage Profile</string>
     <string name="personal_settings">Personal Settings</string>
     <string name="enable_dark_mode">Enable Dark Mode</string>
-    <string name="change_language">Change Language</string>
+    <string name="change_language">한국어</string>
     <string name="current_profile">Current Profile: %1$s</string>
     <string name="food_suggestions">Food Suggestions</string>
     <string name="upload_picture">Upload Picture</string>

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 
+
 public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private static final int REQUEST_CODE_ADD_PROFILE = 101;
@@ -102,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             // You can use the imageUri to do further processing
+            boolean result=true;
+            if (result)
+                openEdibleActivity();
+            else
+                openNotEdibleActivity();
         }
     }
     @Override
@@ -110,14 +116,28 @@ public class MainActivity extends AppCompatActivity {
         loadProfilePreferences();
         if (currentProfileId.isEmpty()) {
             openProfileManagement();
-        } else {
-            setupUi();
-            setupListeners();
         }
+        setupUi();
+        setupListeners();
     }
     // Open the gallery to select a photo
     private void openGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, PICK_IMAGE);
     }
+    private void openEdibleActivity() {
+        Intent intent = new Intent(this, EdibleActivity.class);
+        intent.putExtra("stringA", "can");
+        intent.putExtra("stringB", "eat");
+        intent.putExtra("stringC", "!");
+        startActivity(intent);
+    }
+    private void openNotEdibleActivity() {
+        Intent intent = new Intent(this, EdibleActivity.class);
+        intent.putExtra("stringA", "can");
+        intent.putExtra("stringB", "not");
+        intent.putExtra("stringC", "eat");
+        startActivity(intent);
+    }
+
 }
