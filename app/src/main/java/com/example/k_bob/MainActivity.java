@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -55,8 +57,69 @@ public class MainActivity extends AppCompatActivity {
     private String currentProfileId;
     private String currentProfileName;
     private Set<String> avoidIngredients;
-    String secretKey = "TG11RFpzY3dHaWFtbFFZVkdhUHRpWElxaU9PSE9Mb0k=";
 
+    private Set<String> avoidIngredients_english;
+    String secretKey = "TG11RFpzY3dHaWFtbFFZVkdhUHRpWElxaU9PSE9Mb0k=";
+    private Map<String, String> ingredientTranslationMap = new HashMap<>();
+
+    private void initializeIngredientTranslationMap() {
+        ingredientTranslationMap.put("대두", "soy");
+        ingredientTranslationMap.put("우유", "milk");
+        ingredientTranslationMap.put("쇠고기", "beef");
+        ingredientTranslationMap.put("소고기", "beef");
+        ingredientTranslationMap.put("비프", "beef");
+        ingredientTranslationMap.put("돼지고기", "pork");
+        ingredientTranslationMap.put("돈육", "pork");
+        ingredientTranslationMap.put("포크", "pork");
+        ingredientTranslationMap.put("조개류", "shellfish");
+        ingredientTranslationMap.put("갑각류", "shellfish");
+        ingredientTranslationMap.put("새우", "shrimp");
+        ingredientTranslationMap.put("게", "crab");
+        ingredientTranslationMap.put("바닷가재", "lobster");
+        ingredientTranslationMap.put("어류", "fish");
+        ingredientTranslationMap.put("어패류", "fish");
+        ingredientTranslationMap.put("물고기", "fish");
+        ingredientTranslationMap.put("생선", "fish");
+        ingredientTranslationMap.put("땅콩", "peanut");
+        ingredientTranslationMap.put("피넛", "peanut");
+        ingredientTranslationMap.put("땅콩버터", "peanut butter");
+        ingredientTranslationMap.put("닭고기", "chicken");
+        ingredientTranslationMap.put("치킨", "chicken");
+        ingredientTranslationMap.put("계육", "chicken");
+        ingredientTranslationMap.put("양고기", "lamb");
+        ingredientTranslationMap.put("램", "lamb");
+        ingredientTranslationMap.put("램고기", "lamb");
+        ingredientTranslationMap.put("계란", "egg");
+        ingredientTranslationMap.put("달걀", "egg");
+        ingredientTranslationMap.put("에그", "egg");
+        ingredientTranslationMap.put("유제품", "dairy");
+        ingredientTranslationMap.put("치즈", "cheese");
+        ingredientTranslationMap.put("버터", "butter");
+        ingredientTranslationMap.put("요구르트", "yogurt");
+        ingredientTranslationMap.put("밀가루", "flour");
+        ingredientTranslationMap.put("소맥", "wheat");
+        ingredientTranslationMap.put("견과류", "tree nuts");
+        ingredientTranslationMap.put("아몬드", "almond");
+        ingredientTranslationMap.put("캐슈넛", "cashew nut");
+        ingredientTranslationMap.put("헤이즐넛", "hazelnut");
+        ingredientTranslationMap.put("피칸", "pecan");
+        ingredientTranslationMap.put("콩", "soy");
+        ingredientTranslationMap.put("소야", "soy");
+        ingredientTranslationMap.put("두유", "soy milk");
+        ingredientTranslationMap.put("깨", "sesame");
+        ingredientTranslationMap.put("세사미", "sesame");
+        ingredientTranslationMap.put("옥수수", "corn");
+        ingredientTranslationMap.put("콘", "corn");
+        ingredientTranslationMap.put("옥수수가루", "corn flour");
+        ingredientTranslationMap.put("밀글루텐", "wheat gluten");
+        ingredientTranslationMap.put("글루텐단백질", "gluten protein");
+        ingredientTranslationMap.put("머스타드", "mustard");
+        ingredientTranslationMap.put("셀러리", "celery");
+        ingredientTranslationMap.put("아황산염", "sulfites");
+        ingredientTranslationMap.put("이산화황", "sulfur dioxide");
+        ingredientTranslationMap.put("루핀콩", "lupin beans");
+        ingredientTranslationMap.put("루핀씨", "lupin seeds");
+    }
     private void loadProfilePreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         currentProfileId = preferences.getString(ACTIVE_PROFILE, "");
@@ -71,16 +134,19 @@ public class MainActivity extends AppCompatActivity {
     private void loadUserPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         avoidIngredients = new HashSet<>();
+        avoidIngredients_english = new HashSet<>();
 
         if (preferences.getBoolean(currentProfileId + "_avoid_beef", false)) {
             avoidIngredients.add("쇠고기");
             avoidIngredients.add("소고기");
             avoidIngredients.add("비프");
+            avoidIngredients_english.add("beef");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_pork", false)) {
             avoidIngredients.add("돼지고기");
             avoidIngredients.add("돈육");
             avoidIngredients.add("포크");
+            avoidIngredients_english.add("pork");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_shellfish", false)) {
             avoidIngredients.add("조개류");
@@ -88,33 +154,39 @@ public class MainActivity extends AppCompatActivity {
             avoidIngredients.add("새우");
             avoidIngredients.add("게");
             avoidIngredients.add("바닷가재");
+            avoidIngredients_english.add("shellfish");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_fish", false)) {
             avoidIngredients.add("어류");
             avoidIngredients.add("어패류");
             avoidIngredients.add("물고기");
             avoidIngredients.add("생선");
+            avoidIngredients_english.add("fish");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_peanut", false)) {
             avoidIngredients.add("땅콩");
             avoidIngredients.add("피넛");
             avoidIngredients.add("땅콩버터");
+            avoidIngredients_english.add("peanut");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_chicken", false)) {
             avoidIngredients.add("닭고기");
             avoidIngredients.add("치킨");
             avoidIngredients.add("계육");
+            avoidIngredients_english.add("chicken");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_lamb", false)) {
             avoidIngredients.add("양고기");
             avoidIngredients.add("램");
             avoidIngredients.add("램고기");
+            avoidIngredients_english.add("lamb");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_egg", false)) {
             avoidIngredients.add("계란");
             avoidIngredients.add("달걀");
             avoidIngredients.add("에그");
             avoidIngredients.add("알류");
+            avoidIngredients_english.add("egg");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_dairy", false)) {
             avoidIngredients.add("우유");
@@ -122,11 +194,13 @@ public class MainActivity extends AppCompatActivity {
             avoidIngredients.add("치즈");
             avoidIngredients.add("버터");
             avoidIngredients.add("요구르트");
+            avoidIngredients_english.add("dairy");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_flour", false)) {
             avoidIngredients.add("밀가루");
             avoidIngredients.add("밀");
             avoidIngredients.add("소맥");
+            avoidIngredients_english.add("flour");
         }
 
         if (preferences.getBoolean(currentProfileId + "_avoid_tree_nuts", false)) {
@@ -136,32 +210,41 @@ public class MainActivity extends AppCompatActivity {
             avoidIngredients.add("캐슈넛");
             avoidIngredients.add("헤이즐넛");
             avoidIngredients.add("피칸");
+            avoidIngredients_english.add("tree_nuts");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_soy", false)) {
             avoidIngredients.add("대두");
             avoidIngredients.add("콩");
             avoidIngredients.add("소야");
             avoidIngredients.add("두유");
+            avoidIngredients_english.add("soy");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_sesame", false)) {
             avoidIngredients.add("참깨");
             avoidIngredients.add("깨");
             avoidIngredients.add("세사미");
+            avoidIngredients_english.add("sesame");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_wheat", false)) {
             avoidIngredients.add("밀");
             avoidIngredients.add("소맥");
             avoidIngredients.add("밀가루");
+            avoidIngredients_english.add("wheat");
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_corn", false)) {
             avoidIngredients.add("옥수수");
             avoidIngredients.add("콘");
             avoidIngredients.add("옥수수가루");
+            avoidIngredients_english.add("corn");
         }
-        if (preferences.getBoolean(currentProfileId + "_avoid_gluten", false)) avoidIngredients.add("글루텐");
+        if (preferences.getBoolean(currentProfileId + "_avoid_gluten", false)) {
+            avoidIngredients.add("글루텐");
+            avoidIngredients_english.add("gluten");
+        }
         if (preferences.getBoolean(currentProfileId + "_avoid_mustard", false)) {
             avoidIngredients.add("겨자");
             avoidIngredients.add("머스타드");
+
         }
         if (preferences.getBoolean(currentProfileId + "_avoid_celery", false)) avoidIngredients.add("샐러리");
         if (preferences.getBoolean(currentProfileId + "_avoid_sulfites", false)) {
@@ -243,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                 performOcrRequest(imageFile, new OcrResultCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        Toast.makeText(MainActivity.this, "Success: " + result, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this, "Success: " + result, Toast.LENGTH_LONG).show();
                         //Log.d("OCR_SUCCESS", "OCR Result~: " + result);
                         List<String> the_result = determineLegality(result);
                         if (the_result.isEmpty())
@@ -269,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         for (String text : inferTexts) {
             the_result.append(text);
         }
-        // Log.d("OcrResultParser", "Processing text: " + the_result.toString());
+        Log.d("OcrResultParser", "Processing text: " + the_result.toString());
         List<String> contained_illegal_ingredient = new ArrayList<>();
 
         for (String ingredient : avoidIngredients) {
@@ -284,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         loadProfilePreferences();
         loadUserPreferences();
+        initializeIngredientTranslationMap();
         if (currentProfileId.isEmpty()) {
             openProfileManagement();
         }
@@ -377,9 +461,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EdibleActivity.class);
         intent.putExtra("stringA", "The ingredient does not satisfy your dietary preference!");
         intent.putExtra("stringB", "Because the food contains : ");
+
+        StringBuilder translatedResult = new StringBuilder();
         for (String ingredient : the_result) {
-            intent.putExtra("stringC", " " + ingredient);
+            String translated = ingredientTranslationMap.get(ingredient);
+            if (translated != null) {
+                translatedResult.append(ingredient).append(" (").append(translated).append("), ");
+            } else {
+                translatedResult.append(ingredient).append(", ");
+            }
         }
+
+        // Remove the last comma and space
+        if (translatedResult.length() > 2) {
+            translatedResult.setLength(translatedResult.length() - 2);
+        }
+
+        intent.putExtra("stringC", " " + translatedResult.toString());
         startActivity(intent);
+
     }
 }

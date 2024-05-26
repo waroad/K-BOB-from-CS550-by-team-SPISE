@@ -24,4 +24,5 @@
     <string name="lacto_ovo">Lacto-ovo vegetarianism</string>
     <string name="pollotarian">Pollotarian</string>
     <string name="pescatarian">Pescatarian</string>
+    <string name="warning_icon">!</string>
 </resources>
