@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -15,9 +14,15 @@ import java.util.List;
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHolder> {
 
     private List<FoodItem> foodItems;
+    private OnItemLongClickListener onItemLongClickListener;
 
-    public FoodListAdapter(List<FoodItem> foodItems) {
+    public interface OnItemLongClickListener {
+        void onItemLongClick(FoodItem foodItem);
+    }
+
+    public FoodListAdapter(List<FoodItem> foodItems, OnItemLongClickListener onItemLongClickListener) {
         this.foodItems = foodItems;
+        this.onItemLongClickListener = onItemLongClickListener;
     }
 
     @NonNull
@@ -32,11 +37,18 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         FoodItem foodItem = foodItems.get(position);
         holder.foodName.setText(foodItem.getName());
         holder.foodImage.setImageResource(foodItem.getImageResId());
-        holder.foodInfoButton.setOnClickListener(v -> {
+        holder.foodDescription.setText(foodItem.getDescription());
+
+        holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, FoodInformationActivity.class);
             intent.putExtra("foodName", foodItem.getName());
             context.startActivity(intent);
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            onItemLongClickListener.onItemLongClick(foodItem);
+            return true;
         });
     }
 
@@ -48,13 +60,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView foodName;
         public ImageView foodImage;
-        public Button foodInfoButton;
+        public TextView foodDescription;
 
         public ViewHolder(View itemView) {
             super(itemView);
             foodName = itemView.findViewById(R.id.food_name);
             foodImage = itemView.findViewById(R.id.food_image);
-            foodInfoButton = itemView.findViewById(R.id.food_info_button);
+            foodDescription = itemView.findViewById(R.id.food_description);
         }
     }
 }

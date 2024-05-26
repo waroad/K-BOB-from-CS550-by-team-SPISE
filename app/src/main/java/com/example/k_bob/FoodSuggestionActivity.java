@@ -1,12 +1,13 @@
 package com.example.k_bob;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ public class FoodSuggestionActivity extends AppCompatActivity {
             "Moussaka", "Risotto", "Noodles"
     };
 
+    private List<FoodItem> foodItemList = new ArrayList<>();
+    private FoodListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,26 +32,35 @@ public class FoodSuggestionActivity extends AppCompatActivity {
         backIcon.setOnClickListener(v -> finish());
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        List<FoodItem> foodItemList = new ArrayList<>();
         for (String foodName : foodNames) {
             int imageResId = getFoodImageResourceId(foodName);
-            foodItemList.add(new FoodItem(foodName, imageResId));
+            foodItemList.add(new FoodItem(foodName, imageResId, "Brief description of " + foodName));
         }
 
-        FoodListAdapter adapter = new FoodListAdapter(foodItemList);
+        adapter = new FoodListAdapter(foodItemList, this::showDeleteConfirmationDialog);
         recyclerView.setAdapter(adapter);
     }
 
     private int getFoodImageResourceId(String foodName) {
-        // Replace with actual logic to get image resource ID based on food name
         switch (foodName) {
             case "Pizza":
                 return R.drawable.pizza;
             default:
-                return R.drawable.default_food; // default image if no match is found
+                return R.drawable.default_food;
         }
+    }
+
+    private void showDeleteConfirmationDialog(FoodItem foodItem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Food")
+                .setMessage("Are you sure you want to delete " + foodItem.getName() + "?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    foodItemList.remove(foodItem);
+                    adapter.notifyDataSetChanged();
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

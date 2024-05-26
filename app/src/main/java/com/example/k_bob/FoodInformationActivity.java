@@ -21,7 +21,6 @@ public class FoodInformationActivity extends AppCompatActivity {
         TextView descriptionTextView = findViewById(R.id.description);
         TextView keyComponentsTextView = findViewById(R.id.key_components);
 
-        // Assuming you have a method to get image resource ID from food name
         int foodImageResId = getFoodImageResourceId(foodName);
 
         foodImageView.setImageResource(foodImageResId);
@@ -40,15 +39,11 @@ public class FoodInformationActivity extends AppCompatActivity {
     }
 
     private int getFoodImageResourceId(String foodName) {
-        // Replace with actual logic to get image resource ID based on food name
         switch (foodName) {
             case "Pizza":
                 return R.drawable.pizza;
-            //case "Burger":
-                //return R.drawable.burger;
-            // Add cases for other food names
             default:
-                return R.drawable.default_food; // default image if no match is found
+                return R.drawable.default_food;
         }
     }
 }
