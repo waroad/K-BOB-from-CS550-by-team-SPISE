@@ -38,11 +38,17 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         holder.foodName.setText(foodItem.getName());
         holder.foodImage.setImageResource(foodItem.getImageResId());
         holder.foodDescription.setText(foodItem.getDescription());
+        holder.foodKeyIngredients.setText(foodItem.getKeyIngredients());
 
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, FoodInformationActivity.class);
             intent.putExtra("foodName", foodItem.getName());
+            intent.putExtra("foodImageResId", foodItem.getImageResId());
+            intent.putExtra("detailedDescription", foodItem.getDetailedDescription());
+            intent.putExtra("majorIngredients", foodItem.getMajorIngredients());
+            intent.putExtra("veganType", foodItem.getVeganType());
+            intent.putExtra("dietaryRestrictions", foodItem.getDietaryRestrictions());
             context.startActivity(intent);
         });
 
@@ -61,12 +67,14 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         public TextView foodName;
         public ImageView foodImage;
         public TextView foodDescription;
+        public TextView foodKeyIngredients;
 
         public ViewHolder(View itemView) {
             super(itemView);
             foodName = itemView.findViewById(R.id.food_name);
             foodImage = itemView.findViewById(R.id.food_image);
             foodDescription = itemView.findViewById(R.id.food_description);
+            foodKeyIngredients = itemView.findViewById(R.id.food_key_ingredients);
         }
     }
 }
