@@ -34,29 +34,209 @@ public class FoodSuggestionActivity extends AppCompatActivity {
     }
 
     private void populateFoodItems() {
-        foodItemList.add(new FoodItem("Bibimbap", R.drawable.bibimbap, "Mixed rice with vegetables", "#rice #vegetables #gochujang", "A mixed rice dish with various seasoned vegetables, often topped with gochujang, and sometimes tofu or mushrooms.", "Rice, spinach, carrots, zucchini, mushrooms, bean sprouts, gochujang, sesame oil, nori, tofu", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains sesame, soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Japchae", R.drawable.japchae, "Stir-fried glass noodles with vegetables", "#sweet potato noodles #spinach #mushrooms", "Sweet potato glass noodles stir-fried with a variety of vegetables, often served with soy sauce and sesame oil.", "Sweet potato noodles, spinach, carrots, mushrooms, bell peppers, onions, garlic, soy sauce, sesame oil, scallions", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains sesame, soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Kongguksu", R.drawable.kongguksu, "Cold soy milk noodle soup", "#soy milk #noodles #cucumber", "A refreshing cold noodle soup made with soy milk, typically garnished with cucumber and sometimes sesame seeds.", "Soy milk, wheat noodles, cucumber, sesame seeds, salt, soy sauce, scallions, garlic, vinegar, ice cubes", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, wheat, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Doenjang Jjigae", R.drawable.doenjang_jjigae, "Soybean paste stew with tofu", "#doenjang #tofu #zucchini", "A hearty stew made with fermented soybean paste (doenjang), tofu, and assorted vegetables.", "Doenjang, tofu, zucchini, potatoes, onions, mushrooms, garlic, scallions, chili peppers, water", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Sundubu Jjigae", R.drawable.sundubu_jjigae, "Spicy soft tofu stew", "#soft tofu #gochujang #vegetables", "A spicy stew made with soft tofu, vegetables, and seasoned with gochujang and gochugaru.", "Soft tofu, zucchini, mushrooms, onions, garlic, gochujang, gochugaru, scallions, soy sauce, vegetable broth", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Kimchi Bokkeumbap", R.drawable.kimchi_bokkeumbap, "Kimchi fried rice", "#rice #kimchi #vegetables", "A flavorful fried rice dish made with kimchi, vegetables, and often tofu or mushrooms.", "Rice, vegan kimchi, carrots, onions, peas, corn, tofu, garlic, soy sauce, sesame oil", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Yachae Kimbap", R.drawable.yachae_kimbap, "Vegetable rice rolls", "#rice #vegetables #nori", "Rice and assorted vegetables rolled in nori seaweed, similar to sushi but with a Korean twist.", "Rice, carrots, spinach, cucumber, pickled radish, nori, sesame oil, soy sauce, garlic, salt", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains sesame, soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Tofu Jorim", R.drawable.tofu_jorim, "Braised tofu", "#tofu #soy sauce #garlic", "Tofu braised in a savory soy-based sauce with garlic and chili.", "Tofu, soy sauce, garlic, onions, scallions, sesame oil, chili flakes, sugar, water, sesame seeds", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Hobakjuk", R.drawable.hobakjuk, "Sweet pumpkin porridge", "#pumpkin #rice #sugar", "A creamy and sweet porridge made with pumpkin and rice, often served as a dessert or snack.", "Pumpkin, rice, sugar, water, salt, pine nuts, red beans, chestnuts, jujubes, honey", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains pine nuts. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, soy, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Buchimgae", R.drawable.buchimgae, "Vegetable pancakes", "#flour #vegetables #water", "Savory pancakes made with a batter of flour and water, mixed with various vegetables.", "Flour, water, zucchini, carrots, onions, scallions, garlic, salt, chili peppers, dipping sauce", "Vegan", "Contains wheat, gluten. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, soy, corn, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Dubu Kimchi", R.drawable.dubu_kimchi, "Stir-fried kimchi with tofu", "#kimchi #tofu #garlic", "Stir-fried kimchi served with sliced tofu, often enjoyed as a side dish or main dish.", "Vegan kimchi, tofu, garlic, onions, scallions, sesame oil, soy sauce, sugar, chili flakes, water", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Nokdujeon", R.drawable.nokdujeon, "Mung bean pancakes", "#mung beans #kimchi #vegetables", "Savory pancakes made from ground mung beans mixed with vegetables and kimchi.", "Mung beans, vegan kimchi, onions, scallions, garlic, carrots, bean sprouts, salt, sesame oil, water", "Vegan", "Contains sesame, soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Tteokbokki", R.drawable.tteokbokki, "Spicy rice cakes", "#rice cakes #gochujang #vegetables", "Chewy rice cakes cooked in a spicy and sweet gochujang sauce with vegetables.", "Rice cakes, gochujang, carrots, cabbage, onions, scallions, garlic, soy sauce, sugar, vegetable broth", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Ssambap", R.drawable.ssambap, "Rice and vegetables wrapped in leafy greens", "#rice #leafy greens #ssamjang", "Rice and vegetables wrapped in leafy greens, typically served with a spicy ssamjang paste.", "Rice, lettuce, perilla leaves, carrots, cucumbers, bell peppers, ssamjang, garlic, sesame oil, chili paste", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Kimchi Jjigae", R.drawable.kimchi_jjigae, "Kimchi stew with tofu", "#kimchi #tofu #vegetables", "A hearty and spicy stew made with kimchi, tofu, and various vegetables.", "Vegan kimchi, tofu, onions, garlic, scallions, zucchini, mushrooms, gochujang, soy sauce, vegetable broth", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, sesame, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Gaji Bokkeum", R.drawable.gaji_bokkeum, "Stir-fried eggplant", "#eggplant #soy sauce #garlic", "Stir-fried eggplant seasoned with soy sauce, garlic, and sesame oil.", "Eggplant, soy sauce, garlic, onions, scallions, sesame oil, sesame seeds, chili flakes, sugar, water", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Yachae Bibim Guksu", R.drawable.yachae_bibim_guksu, "Spicy mixed noodles with vegetables", "#noodles #vegetables #gochujang", "Cold noodles mixed with a variety of vegetables and a spicy gochujang sauce.", "Wheat noodles, cucumber, carrots, spinach, gochujang, soy sauce, garlic, sesame oil, sugar, vinegar", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, wheat, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Kongnamul Gukbap", R.drawable.kongnamul_gukbap, "Bean sprout soup with rice", "#bean sprouts #rice #garlic", "A comforting soup made with bean sprouts, rice, and seasoned with garlic and soy sauce.", "Bean sprouts, rice, garlic, scallions, soy sauce, sesame oil, gochugaru, vegetable broth, salt, pepper", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Sigeumchi Doenjang Guk", R.drawable.sigeumchi_doenjang_guk, "Spinach and soybean paste soup", "#spinach #doenjang #garlic", "A savory soup made with spinach, soybean paste (doenjang), and garlic.", "Spinach, doenjang, garlic, onions, scallions, tofu, water, soy sauce, sesame oil, salt", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
-        foodItemList.add(new FoodItem("Chwinamul Bap", R.drawable.chwinamul_bap, "Steamed rice with seasoned aster leaves", "#rice #aster leaves #garlic", "Steamed rice mixed with seasoned aster leaves and garlic, often enjoyed with a soy-based dipping sauce.", "Rice, aster leaves, garlic, soy sauce, sesame oil, scallions, chili flakes, salt, water, vegetable broth", "Vegan, Lacto, Ovo, Lacto-ovo", "Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin."));
+        foodItemList.add(new FoodItem(
+                getString(R.string.bibimbap_name),
+                R.drawable.bibimbap,
+                getString(R.string.bibimbap_description),
+                getString(R.string.bibimbap_tags),
+                getString(R.string.bibimbap_long_description),
+                getString(R.string.bibimbap_ingredients),
+                getString(R.string.bibimbap_dietary_info),
+                getString(R.string.bibimbap_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.japchae_name),
+                R.drawable.japchae,
+                getString(R.string.japchae_description),
+                getString(R.string.japchae_tags),
+                getString(R.string.japchae_long_description),
+                getString(R.string.japchae_ingredients),
+                getString(R.string.japchae_dietary_info),
+                getString(R.string.japchae_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.kongguksu_name),
+                R.drawable.kongguksu,
+                getString(R.string.kongguksu_description),
+                getString(R.string.kongguksu_tags),
+                getString(R.string.kongguksu_long_description),
+                getString(R.string.kongguksu_ingredients),
+                getString(R.string.kongguksu_dietary_info),
+                getString(R.string.kongguksu_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.doenjang_jjigae_name),
+                R.drawable.doenjang_jjigae,
+                getString(R.string.doenjang_jjigae_description),
+                getString(R.string.doenjang_jjigae_tags),
+                getString(R.string.doenjang_jjigae_long_description),
+                getString(R.string.doenjang_jjigae_ingredients),
+                getString(R.string.doenjang_jjigae_dietary_info),
+                getString(R.string.doenjang_jjigae_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.sundubu_jjigae_name),
+                R.drawable.sundubu_jjigae,
+                getString(R.string.sundubu_jjigae_description),
+                getString(R.string.sundubu_jjigae_tags),
+                getString(R.string.sundubu_jjigae_long_description),
+                getString(R.string.sundubu_jjigae_ingredients),
+                getString(R.string.sundubu_jjigae_dietary_info),
+                getString(R.string.sundubu_jjigae_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.kimchi_bokkeumbap_name),
+                R.drawable.kimchi_bokkeumbap,
+                getString(R.string.kimchi_bokkeumbap_description),
+                getString(R.string.kimchi_bokkeumbap_tags),
+                getString(R.string.kimchi_bokkeumbap_long_description),
+                getString(R.string.kimchi_bokkeumbap_ingredients),
+                getString(R.string.kimchi_bokkeumbap_dietary_info),
+                getString(R.string.kimchi_bokkeumbap_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.yachae_kimbap_name),
+                R.drawable.yachae_kimbap,
+                getString(R.string.yachae_kimbap_description),
+                getString(R.string.yachae_kimbap_tags),
+                getString(R.string.yachae_kimbap_long_description),
+                getString(R.string.yachae_kimbap_ingredients),
+                getString(R.string.yachae_kimbap_dietary_info),
+                getString(R.string.yachae_kimbap_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.tofu_jorim_name),
+                R.drawable.tofu_jorim,
+                getString(R.string.tofu_jorim_description),
+                getString(R.string.tofu_jorim_tags),
+                getString(R.string.tofu_jorim_long_description),
+                getString(R.string.tofu_jorim_ingredients),
+                getString(R.string.tofu_jorim_dietary_info),
+                getString(R.string.tofu_jorim_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.hobakjuk_name),
+                R.drawable.hobakjuk,
+                getString(R.string.hobakjuk_description),
+                getString(R.string.hobakjuk_tags),
+                getString(R.string.hobakjuk_long_description),
+                getString(R.string.hobakjuk_ingredients),
+                getString(R.string.hobakjuk_dietary_info),
+                getString(R.string.hobakjuk_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.buchimgae_name),
+                R.drawable.buchimgae,
+                getString(R.string.buchimgae_description),
+                getString(R.string.buchimgae_tags),
+                getString(R.string.buchimgae_long_description),
+                getString(R.string.buchimgae_ingredients),
+                getString(R.string.buchimgae_dietary_info),
+                getString(R.string.buchimgae_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.dubu_kimchi_name),
+                R.drawable.dubu_kimchi,
+                getString(R.string.dubu_kimchi_description),
+                getString(R.string.dubu_kimchi_tags),
+                getString(R.string.dubu_kimchi_long_description),
+                getString(R.string.dubu_kimchi_ingredients),
+                getString(R.string.dubu_kimchi_dietary_info),
+                getString(R.string.dubu_kimchi_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.nokdujeon_name),
+                R.drawable.nokdujeon,
+                getString(R.string.nokdujeon_description),
+                getString(R.string.nokdujeon_tags),
+                getString(R.string.nokdujeon_long_description),
+                getString(R.string.nokdujeon_ingredients),
+                getString(R.string.nokdujeon_dietary_info),
+                getString(R.string.nokdujeon_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.tteokbokki_name),
+                R.drawable.tteokbokki,
+                getString(R.string.tteokbokki_description),
+                getString(R.string.tteokbokki_tags),
+                getString(R.string.tteokbokki_long_description),
+                getString(R.string.tteokbokki_ingredients),
+                getString(R.string.tteokbokki_dietary_info),
+                getString(R.string.tteokbokki_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.ssambap_name),
+                R.drawable.ssambap,
+                getString(R.string.ssambap_description),
+                getString(R.string.ssambap_tags),
+                getString(R.string.ssambap_long_description),
+                getString(R.string.ssambap_ingredients),
+                getString(R.string.ssambap_dietary_info),
+                getString(R.string.ssambap_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.kimchi_jjigae_name),
+                R.drawable.kimchi_jjigae,
+                getString(R.string.kimchi_jjigae_description),
+                getString(R.string.kimchi_jjigae_tags),
+                getString(R.string.kimchi_jjigae_long_description),
+                getString(R.string.kimchi_jjigae_ingredients),
+                getString(R.string.kimchi_jjigae_dietary_info),
+                getString(R.string.kimchi_jjigae_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.gaji_bokkeum_name),
+                R.drawable.gaji_bokkeum,
+                getString(R.string.gaji_bokkeum_description),
+                getString(R.string.gaji_bokkeum_tags),
+                getString(R.string.gaji_bokkeum_long_description),
+                getString(R.string.gaji_bokkeum_ingredients),
+                getString(R.string.gaji_bokkeum_dietary_info),
+                getString(R.string.gaji_bokkeum_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.yachae_bibim_guksu_name),
+                R.drawable.yachae_bibim_guksu,
+                getString(R.string.yachae_bibim_guksu_description),
+                getString(R.string.yachae_bibim_guksu_tags),
+                getString(R.string.yachae_bibim_guksu_long_description),
+                getString(R.string.yachae_bibim_guksu_ingredients),
+                getString(R.string.yachae_bibim_guksu_dietary_info),
+                getString(R.string.yachae_bibim_guksu_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.kongnamul_gukbap_name),
+                R.drawable.kongnamul_gukbap,
+                getString(R.string.kongnamul_gukbap_description),
+                getString(R.string.kongnamul_gukbap_tags),
+                getString(R.string.kongnamul_gukbap_long_description),
+                getString(R.string.kongnamul_gukbap_ingredients),
+                getString(R.string.kongnamul_gukbap_dietary_info),
+                getString(R.string.kongnamul_gukbap_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.sigeumchi_doenjang_guk_name),
+                R.drawable.sigeumchi_doenjang_guk,
+                getString(R.string.sigeumchi_doenjang_guk_description),
+                getString(R.string.sigeumchi_doenjang_guk_tags),
+                getString(R.string.sigeumchi_doenjang_guk_long_description),
+                getString(R.string.sigeumchi_doenjang_guk_ingredients),
+                getString(R.string.sigeumchi_doenjang_guk_dietary_info),
+                getString(R.string.sigeumchi_doenjang_guk_restrictions)
+        ));
+        foodItemList.add(new FoodItem(
+                getString(R.string.chwinamul_bap_name),
+                R.drawable.chwinamul_bap,
+                getString(R.string.chwinamul_bap_description),
+                getString(R.string.chwinamul_bap_tags),
+                getString(R.string.chwinamul_bap_long_description),
+                getString(R.string.chwinamul_bap_ingredients),
+                getString(R.string.chwinamul_bap_dietary_info),
+                getString(R.string.chwinamul_bap_restrictions)
+        ));
     }
 
-    private void showDeleteConfirmationDialog(FoodItem foodItem) {
+        private void showDeleteConfirmationDialog(FoodItem foodItem) {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Food")
                 .setMessage("Are you sure you want to delete " + foodItem.getName() + "?")
