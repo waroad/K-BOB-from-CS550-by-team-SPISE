@@ -11,8 +11,6 @@
     <string name="enable_dark_mode">Enable Dark Mode</string>
     <string name="change_language">한국어</string>
     <string name="current_profile">Current Profile: %1$s</string>
-    <string name="food_suggestions">Food Suggestions</string>
-    <string name="upload_picture">Upload Picture</string>
     <string name="add_profile">Add Profile</string>
     <string name="save_settings">Save Settings</string>
     <string name="dietary_restrictions">Dietary Restrictions</string>
@@ -24,10 +22,8 @@
     <string name="lacto_ovo">Lacto-ovo vegetarianism</string>
     <string name="pollotarian">Pollotarian</string>
     <string name="pescatarian">Pescatarian</string>
-    <string name="food_suggestions_icon_desc">Food Suggestion Icon</string>
     <string name="setting">Setting</string>
-    <string name="settings_icon_desc">Settings Icon</string>
-    <string name="upload_picture_icon_desc">Upload Picture Icon</string>
     <string name="order_translation">Order Translation</string>
-    <string name="order_translation_icon_desc">Order Translation Icon</string>
+    <string name="food_suggestions">Food Suggestions</string>
+    <string name="upload_picture">Upload Picture</string>
 </resources>

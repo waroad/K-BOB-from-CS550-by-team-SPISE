@@ -46,7 +46,7 @@ public class FoodInformationActivity extends AppCompatActivity {
 
         findViewById(R.id.back_icon).setOnClickListener(v -> finish());
 
-        findViewById(R.id.map_icon).setOnClickListener(v -> {
+        findViewById(R.id.view_in_map).setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(foodName + " restaurant"));
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");

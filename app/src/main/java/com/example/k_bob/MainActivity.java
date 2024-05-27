@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
@@ -48,11 +49,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set up the click listener for the Setting icon
-        findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
+        // Initialize the settings button for profile management (using fragment navigation)
+        ImageButton settingsButton = findViewById(R.id.setting);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ManageProfileActivity.class));
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in_right,  // Enter animation
+                                R.anim.slide_out_right,  // Exit animation
+                                R.anim.slide_in_right,  // Pop enter animation (optional)
+                                R.anim.slide_out_right   // Pop exit animation (optional)
+                        )
+                        .replace(R.id.fragment_container, new SettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

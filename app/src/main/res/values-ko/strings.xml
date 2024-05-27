@@ -11,8 +11,6 @@
     <string name="enable_dark_mode">다크 모드 활성화</string>
     <string name="change_language">English</string>
     <string name="current_profile">현재 프로필: %1$s</string>
-    <string name="food_suggestions">음식 추천</string>
-    <string name="upload_picture">사진 업로드</string>
     <string name="add_profile">프로필 추가</string>
     <string name="save_settings">저장</string>
     <string name="dietary_restrictions">제한되는 음식물</string>
@@ -24,4 +22,8 @@
     <string name="lacto_ovo">락토-오보</string>
     <string name="pollotarian">폴로</string>
     <string name="pescatarian">페스코</string>
+    <string name="setting">설정</string>
+    <string name="order_translation">주문 번역</string>
+    <string name="food_suggestions">음식 추천</string>
+    <string name="upload_picture">사진 업로드</string>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_current_profile_name"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="23dp"
         android:text="@string/manage_profile" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -27,16 +27,17 @@
         style="@style/FancyButton" />
 
     <!-- Enable Dark Mode Button -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_dark_mode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/enable_dark_mode"
-        android:layout_below="@+id/button_personal_settings"
-        android:layout_marginTop="3dp"
-        style="@style/FancyButton" />
 
     <!-- Change Language Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_dark_mode"
+        style="@style/FancyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_personal_settings"
+        android:layout_marginTop="1dp"
+        android:text="@string/enable_dark_mode" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_language"
         android:layout_width="match_parent"
