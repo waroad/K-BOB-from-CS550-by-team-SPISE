@@ -26,4 +26,8 @@
     <string name="order_translation">Order Translation</string>
     <string name="food_suggestions">Food Suggestions</string>
     <string name="upload_picture">Upload Picture</string>
+    <string name="back_button_desc">Back</string>
+    <string name="recommendation_icon_desc">Recommendation</string>
+    <string name="korean_translation_icon_desc">Korean Translation</string>
+    <string name="pronunciation_icon_desc">Pronunciation</string>
 </resources>

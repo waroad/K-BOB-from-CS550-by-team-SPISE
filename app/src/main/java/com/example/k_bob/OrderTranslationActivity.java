@@ -2,199 +2,305 @@ package com.example.k_bob;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
+import androidx.appcompat.widget.Toolbar;
+import android.widget.TextView;
+
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class OrderTranslationActivity extends AppCompatActivity {
+
     private static final String PREFS_NAME = "profiles_preferences";
     private static final String ACTIVE_PROFILE = "active_profile";
+    private String currentProfileId;
+    private String currentProfileName;
+    private Set<String> avoidIngredients;
+    private Set<String> unrestrictedIngredients;
+    private Map<String, String> ingredientTranslationMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_translation);
 
-        ImageView backIcon = findViewById(R.id.back_icon);
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Go back to the previous screen
-            }
-        });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        String profileId = getIntent().getStringExtra("activeProfileId");
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        currentProfileId = preferences.getString(ACTIVE_PROFILE, "");
 
-        if (profileId != null) {
-            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-            String veganType = getVeganType(preferences, profileId);
-            List<String> checkedRestrictions = getCheckedRestrictions(preferences, profileId);
-            List<String> uncheckedRestrictions = getUncheckedRestrictions(preferences, profileId);
-
-            // Translate restrictions to Korean
-            Map<String, String> koreanTranslations = getKoreanTranslations();
-            Map<String, String> koreanPronunciations = getKoreanPronunciations();
-            List<String> checkedRestrictionsKorean = new ArrayList<>();
-            List<String> uncheckedRestrictionsKorean = new ArrayList<>();
-            List<String> checkedRestrictionsPronunciation = new ArrayList<>();
-            List<String> uncheckedRestrictionsPronunciation = new ArrayList<>();
-
-            for (String restriction : checkedRestrictions) {
-                checkedRestrictionsKorean.add(koreanTranslations.get(restriction));
-                checkedRestrictionsPronunciation.add(koreanPronunciations.get(restriction));
-            }
-
-            for (String restriction : uncheckedRestrictions) {
-                uncheckedRestrictionsKorean.add(koreanTranslations.get(restriction));
-                uncheckedRestrictionsPronunciation.add(koreanPronunciations.get(restriction));
-            }
-
-            String translationMessage = generateTranslationMessage(veganType, checkedRestrictions, uncheckedRestrictions);
-            String translationMessageKorean = generateTranslationMessageKorean(checkedRestrictionsKorean, uncheckedRestrictionsKorean);
-            String translationMessagePronunciation = generateTranslationMessagePronunciation(checkedRestrictionsPronunciation, uncheckedRestrictionsPronunciation);
-
-            TextView translationTextView = findViewById(R.id.translation_text);
-            translationTextView.setText(translationMessage);
-
-            TextView translationKoreanTextView = findViewById(R.id.translation_text_korean);
-            translationKoreanTextView.setText(translationMessageKorean);
-
-            TextView translationPronunciationTextView = findViewById(R.id.translation_text_pronunciation);
-            translationPronunciationTextView.setText(translationMessagePronunciation);
+        if (!currentProfileId.isEmpty()) {
+            loadProfilePreferences(preferences);
+            generateTranslation();
         }
     }
 
-    private String getVeganType(SharedPreferences preferences, String profileId) {
-        if (preferences.getBoolean(profileId + "_is_vegan", false)) return "Vegan";
-        if (preferences.getBoolean(profileId + "_is_lacto", false)) return "Lacto";
-        if (preferences.getBoolean(profileId + "_is_ovo", false)) return "Ovo";
-        if (preferences.getBoolean(profileId + "_is_lacto-ovo", false)) return "Lacto-ovo";
-        if (preferences.getBoolean(profileId + "_is_pollotarian", false)) return "Pollotarian";
-        if (preferences.getBoolean(profileId + "_is_pescatarian", false)) return "Pescatarian";
+    private void loadProfilePreferences(SharedPreferences preferences) {
+        avoidIngredients = new HashSet<>();
+        unrestrictedIngredients = new HashSet<>();
+        ingredientTranslationMap = new HashMap<>();
+        initializeIngredientTranslationMap();
+
+        if (preferences.getBoolean(currentProfileId + "_avoid_beef", false)) {
+            avoidIngredients.add("beef");
+        } else {
+            unrestrictedIngredients.add("beef");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_pork", false)) {
+            avoidIngredients.add("pork");
+        } else {
+            unrestrictedIngredients.add("pork");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_shellfish", false)) {
+            avoidIngredients.add("shellfish");
+        } else {
+            unrestrictedIngredients.add("shellfish");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_fish", false)) {
+            avoidIngredients.add("fish");
+        } else {
+            unrestrictedIngredients.add("fish");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_peanut", false)) {
+            avoidIngredients.add("peanut");
+        } else {
+            unrestrictedIngredients.add("peanut");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_chicken", false)) {
+            avoidIngredients.add("chicken");
+        } else {
+            unrestrictedIngredients.add("chicken");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_lamb", false)) {
+            avoidIngredients.add("lamb");
+        } else {
+            unrestrictedIngredients.add("lamb");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_egg", false)) {
+            avoidIngredients.add("egg");
+        } else {
+            unrestrictedIngredients.add("egg");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_dairy", false)) {
+            avoidIngredients.add("dairy");
+        } else {
+            unrestrictedIngredients.add("dairy");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_flour", false)) {
+            avoidIngredients.add("flour");
+        } else {
+            unrestrictedIngredients.add("flour");
+        }
+
+        if (preferences.getBoolean(currentProfileId + "_avoid_tree_nuts", false)) {
+            avoidIngredients.add("tree nuts");
+        } else {
+            unrestrictedIngredients.add("tree nuts");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_soy", false)) {
+            avoidIngredients.add("soy");
+        } else {
+            unrestrictedIngredients.add("soy");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_sesame", false)) {
+            avoidIngredients.add("sesame");
+        } else {
+            unrestrictedIngredients.add("sesame");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_wheat", false)) {
+            avoidIngredients.add("wheat");
+        } else {
+            unrestrictedIngredients.add("wheat");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_corn", false)) {
+            avoidIngredients.add("corn");
+        } else {
+            unrestrictedIngredients.add("corn");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_gluten", false)) {
+            avoidIngredients.add("gluten");
+        } else {
+            unrestrictedIngredients.add("gluten");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_mustard", false)) {
+            avoidIngredients.add("mustard");
+        } else {
+            unrestrictedIngredients.add("mustard");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_celery", false)) {
+            avoidIngredients.add("celery");
+        } else {
+            unrestrictedIngredients.add("celery");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_sulfites", false)) {
+            avoidIngredients.add("sulfites");
+        } else {
+            unrestrictedIngredients.add("sulfites");
+        }
+        if (preferences.getBoolean(currentProfileId + "_avoid_lupin", false)) {
+            avoidIngredients.add("lupin");
+        } else {
+            unrestrictedIngredients.add("lupin");
+        }
+    }
+
+    private void initializeIngredientTranslationMap() {
+        ingredientTranslationMap.put("beef", "쇠고기");
+        ingredientTranslationMap.put("pork", "돼지고기");
+        ingredientTranslationMap.put("shellfish", "조개류");
+        ingredientTranslationMap.put("fish", "생선");
+        ingredientTranslationMap.put("peanut", "땅콩");
+        ingredientTranslationMap.put("chicken", "닭고기");
+        ingredientTranslationMap.put("lamb", "양고기");
+        ingredientTranslationMap.put("egg", "계란");
+        ingredientTranslationMap.put("dairy", "유제품");
+        ingredientTranslationMap.put("flour", "밀가루");
+        ingredientTranslationMap.put("tree nuts", "견과류");
+        ingredientTranslationMap.put("soy", "대두");
+        ingredientTranslationMap.put("sesame", "참깨");
+        ingredientTranslationMap.put("wheat", "밀");
+        ingredientTranslationMap.put("corn", "옥수수");
+        ingredientTranslationMap.put("gluten", "글루텐");
+        ingredientTranslationMap.put("mustard", "겨자");
+        ingredientTranslationMap.put("celery", "셀러리");
+        ingredientTranslationMap.put("sulfites", "아황산염");
+        ingredientTranslationMap.put("lupin", "루핀");
+    }
+
+    private void generateTranslation() {
+        TextView translationTextView = findViewById(R.id.translation_text_recommendation);
+        TextView translationTextKoreanView = findViewById(R.id.translation_text_korean_view);
+        TextView translationTextPronunciationView = findViewById(R.id.translation_text_pronunciation_view);
+
+        String veganType = getVeganType();
+
+        StringBuilder avoidIngredientsStr = new StringBuilder();
+        StringBuilder avoidIngredientsKorean = new StringBuilder();
+        StringBuilder avoidIngredientsPronunciation = new StringBuilder();
+        StringBuilder unrestrictedIngredientsStr = new StringBuilder();
+        StringBuilder unrestrictedIngredientsKorean = new StringBuilder();
+        StringBuilder unrestrictedIngredientsPronunciation = new StringBuilder();
+
+        for (String ingredient : avoidIngredients) {
+            avoidIngredientsStr.append(ingredient).append(", ");
+            avoidIngredientsKorean.append(ingredientTranslationMap.get(ingredient)).append(", ");
+            avoidIngredientsPronunciation.append(getKoreanPronunciation(ingredient)).append(", ");
+        }
+
+        for (String ingredient : unrestrictedIngredients) {
+            unrestrictedIngredientsStr.append(ingredient).append(", ");
+            unrestrictedIngredientsKorean.append(ingredientTranslationMap.get(ingredient)).append(", ");
+            unrestrictedIngredientsPronunciation.append(getKoreanPronunciation(ingredient)).append(", ");
+        }
+
+        // Remove trailing comma and space
+        if (avoidIngredientsStr.length() > 0) {
+            avoidIngredientsStr.setLength(avoidIngredientsStr.length() - 2);
+        }
+        if (unrestrictedIngredientsStr.length() > 0) {
+            unrestrictedIngredientsStr.setLength(unrestrictedIngredientsStr.length() - 2);
+        }
+        if (avoidIngredientsKorean.length() > 0) {
+            avoidIngredientsKorean.setLength(avoidIngredientsKorean.length() - 2);
+        }
+        if (unrestrictedIngredientsKorean.length() > 0) {
+            unrestrictedIngredientsKorean.setLength(unrestrictedIngredientsKorean.length() - 2);
+        }
+        if (avoidIngredientsPronunciation.length() > 0) {
+            avoidIngredientsPronunciation.setLength(avoidIngredientsPronunciation.length() - 2);
+        }
+        if (unrestrictedIngredientsPronunciation.length() > 0) {
+            unrestrictedIngredientsPronunciation.setLength(unrestrictedIngredientsPronunciation.length() - 2);
+        }
+
+        String translation = String.format(Locale.getDefault(),
+                "Based on your dietary preferences (%s), we recommend you say:\n\"Please eliminate %s if they are included in the ingredients. However, %s are acceptable.\"\n\n",
+                veganType,
+                avoidIngredientsStr.toString(),
+                unrestrictedIngredientsStr.toString());
+
+        String koreanTranslation = String.format(Locale.getDefault(),
+                "In Korean:\n\"만약 %s이 재료에 포함되어 있다면 제거해주세요. 단, %s은 허용됩니다.\"\n\n",
+                avoidIngredientsKorean.toString(),
+                unrestrictedIngredientsKorean.toString());
+
+        String pronunciationTranslation = String.format(Locale.getDefault(),
+                "In speaking:\n\"Manyak %s Jaeryoe Pohamdoeeo Itda-myeon, Geugeotdeureul Jegeohaseyo. %s Heoyongdoemnida\"",
+                avoidIngredientsPronunciation.toString(),
+                unrestrictedIngredientsPronunciation.toString());
+
+        translationTextView.setText(translation);
+        translationTextKoreanView.setText(koreanTranslation);
+        translationTextPronunciationView.setText(pronunciationTranslation);
+    }
+
+    private String getVeganType() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (preferences.getBoolean(currentProfileId + "_is_vegan", false)) {
+            return "Vegan";
+        } else if (preferences.getBoolean(currentProfileId + "_is_lacto", false)) {
+            return "Lacto";
+        } else if (preferences.getBoolean(currentProfileId + "_is_ovo", false)) {
+            return "Ovo";
+        } else if (preferences.getBoolean(currentProfileId + "_is_lacto_ovo", false)) {
+            return "Lacto-ovo";
+        } else if (preferences.getBoolean(currentProfileId + "_is_pollotarian", false)) {
+            return "Pollotarian";
+        } else if (preferences.getBoolean(currentProfileId + "_is_pescatarian", false)) {
+            return "Pescatarian";
+        }
         return "Unknown";
     }
 
-    private List<String> getCheckedRestrictions(SharedPreferences preferences, String profileId) {
-        List<String> checkedRestrictions = new ArrayList<>();
-        Map<String, Boolean> restrictionMap = getRestrictionMap(preferences, profileId);
-
-        for (Map.Entry<String, Boolean> entry : restrictionMap.entrySet()) {
-            if (entry.getValue()) {
-                checkedRestrictions.add(entry.getKey());
-            }
+    private String getKoreanPronunciation(String ingredient) {
+        switch (ingredient) {
+            case "beef":
+                return "soegogi";
+            case "pork":
+                return "dwaejigogi";
+            case "shellfish":
+                return "jogaelyu";
+            case "fish":
+                return "saengseon";
+            case "peanut":
+                return "ttangkong";
+            case "chicken":
+                return "dalgogi";
+            case "lamb":
+                return "yanggogi";
+            case "egg":
+                return "gyeran";
+            case "dairy":
+                return "yuchaepum";
+            case "flour":
+                return "milgaru";
+            case "tree nuts":
+                return "gyeonggwa";
+            case "soy":
+                return "kong";
+            case "sesame":
+                return "chamkkae";
+            case "wheat":
+                return "mil";
+            case "corn":
+                return "oksusu";
+            case "gluten":
+                return "geulluten";
+            case "mustard":
+                return "gyeoja";
+            case "celery":
+                return "saelleori";
+            case "sulfites":
+                return "ahwangsan";
+            case "lupin":
+                return "lupin";
+            default:
+                return ingredient;
         }
-
-        return checkedRestrictions;
-    }
-
-    private List<String> getUncheckedRestrictions(SharedPreferences preferences, String profileId) {
-        List<String> uncheckedRestrictions = new ArrayList<>();
-        Map<String, Boolean> restrictionMap = getRestrictionMap(preferences, profileId);
-
-        for (Map.Entry<String, Boolean> entry : restrictionMap.entrySet()) {
-            if (!entry.getValue()) {
-                uncheckedRestrictions.add(entry.getKey());
-            }
-        }
-
-        return uncheckedRestrictions;
-    }
-
-    private Map<String, Boolean> getRestrictionMap(SharedPreferences preferences, String profileId) {
-        Map<String, Boolean> restrictionMap = new HashMap<>();
-        restrictionMap.put("avoid_beef", preferences.getBoolean(profileId + "_avoid_beef", false));
-        restrictionMap.put("avoid_pork", preferences.getBoolean(profileId + "_avoid_pork", false));
-        restrictionMap.put("avoid_shellfish", preferences.getBoolean(profileId + "_avoid_shellfish", false));
-        restrictionMap.put("avoid_fish", preferences.getBoolean(profileId + "_avoid_fish", false));
-        restrictionMap.put("avoid_peanut", preferences.getBoolean(profileId + "_avoid_peanut", false));
-        restrictionMap.put("avoid_chicken", preferences.getBoolean(profileId + "_avoid_chicken", false));
-        restrictionMap.put("avoid_lamb", preferences.getBoolean(profileId + "_avoid_lamb", false));
-        restrictionMap.put("avoid_egg", preferences.getBoolean(profileId + "_avoid_egg", false));
-        restrictionMap.put("avoid_dairy", preferences.getBoolean(profileId + "_avoid_dairy", false));
-        restrictionMap.put("avoid_flour", preferences.getBoolean(profileId + "_avoid_flour", false));
-        restrictionMap.put("avoid_tree_nuts", preferences.getBoolean(profileId + "_avoid_tree_nuts", false));
-        restrictionMap.put("avoid_soy", preferences.getBoolean(profileId + "_avoid_soy", false));
-        restrictionMap.put("avoid_sesame", preferences.getBoolean(profileId + "_avoid_sesame", false));
-        restrictionMap.put("avoid_wheat", preferences.getBoolean(profileId + "_avoid_wheat", false));
-        restrictionMap.put("avoid_corn", preferences.getBoolean(profileId + "_avoid_corn", false));
-        restrictionMap.put("avoid_gluten", preferences.getBoolean(profileId + "_avoid_gluten", false));
-        restrictionMap.put("avoid_mustard", preferences.getBoolean(profileId + "_avoid_mustard", false));
-        restrictionMap.put("avoid_celery", preferences.getBoolean(profileId + "_avoid_celery", false));
-        restrictionMap.put("avoid_sulfites", preferences.getBoolean(profileId + "_avoid_sulfites", false));
-        restrictionMap.put("avoid_lupin", preferences.getBoolean(profileId + "_avoid_lupin", false));
-
-        return restrictionMap;
-    }
-
-    private Map<String, String> getKoreanTranslations() {
-        Map<String, String> translations = new HashMap<>();
-        translations.put("avoid_beef", "쇠고기");
-        translations.put("avoid_pork", "돼지고기");
-        translations.put("avoid_shellfish", "조개류");
-        translations.put("avoid_fish", "생선");
-        translations.put("avoid_peanut", "땅콩");
-        translations.put("avoid_chicken", "닭고기");
-        translations.put("avoid_lamb", "양고기");
-        translations.put("avoid_egg", "계란");
-        translations.put("avoid_dairy", "유제품");
-        translations.put("avoid_flour", "밀가루");
-        translations.put("avoid_tree_nuts", "견과류");
-        translations.put("avoid_soy", "콩");
-        translations.put("avoid_sesame", "참깨");
-        translations.put("avoid_wheat", "밀");
-        translations.put("avoid_corn", "옥수수");
-        translations.put("avoid_gluten", "글루텐");
-        translations.put("avoid_mustard", "겨자");
-        translations.put("avoid_celery", "샐러리");
-        translations.put("avoid_sulfites", "아황산염");
-        translations.put("avoid_lupin", "루핀");
-        return translations;
-    }
-
-    private Map<String, String> getKoreanPronunciations() {
-        Map<String, String> pronunciations = new HashMap<>();
-        pronunciations.put("avoid_beef", "sogogi");
-        pronunciations.put("avoid_pork", "dwaejigogi");
-        pronunciations.put("avoid_shellfish", "jogaeryu");
-        pronunciations.put("avoid_fish", "saengseon");
-        pronunciations.put("avoid_peanut", "ttangkong");
-        pronunciations.put("avoid_chicken", "dalgogi");
-        pronunciations.put("avoid_lamb", "yanggogi");
-        pronunciations.put("avoid_egg", "gyeran");
-        pronunciations.put("avoid_dairy", "yooje");
-        pronunciations.put("avoid_flour", "milgaru");
-        pronunciations.put("avoid_tree_nuts", "gyeongwalyu");
-        pronunciations.put("avoid_soy", "kong");
-        pronunciations.put("avoid_sesame", "chamkae");
-        pronunciations.put("avoid_wheat", "mil");
-        pronunciations.put("avoid_corn", "oksusu");
-        pronunciations.put("avoid_gluten", "geulluten");
-        pronunciations.put("avoid_mustard", "gyeoja");
-        pronunciations.put("avoid_celery", "saelleri");
-        pronunciations.put("avoid_sulfites", "ahwangsanyeom");
-        pronunciations.put("avoid_lupin", "lupin");
-        return pronunciations;
-    }
-
-    private String generateTranslationMessage(String veganType, List<String> checkedRestrictions, List<String> uncheckedRestrictions) {
-        return "Based on your dietary preferences (" + veganType + "), we recommend you say \"Please eliminate " +
-                String.join(", ", checkedRestrictions) + " if they are included in the ingredients. However, " +
-                String.join(", ", uncheckedRestrictions) + " are acceptable\"";
-    }
-
-    private String generateTranslationMessageKorean(List<String> checkedRestrictionsKorean, List<String> uncheckedRestrictionsKorean) {
-        return "In Korean, \"만약 " + String.join(", ", checkedRestrictionsKorean) + "이 재료에 포함되어 있다면 제거해주세요. 단, " +
-                String.join(", ", uncheckedRestrictionsKorean) + "은 허용됩니다.\"";
-    }
-
-    private String generateTranslationMessagePronunciation(List<String> checkedRestrictionsPronunciation, List<String> uncheckedRestrictionsPronunciation) {
-        return "In speaking, \"Manyak " + String.join(", ", checkedRestrictionsPronunciation) +
-                " Jaeryoe Pohamdoeeo Itda-myeon, Geugeotdeureul Jegeohaseyo. " +
-                String.join(", ", uncheckedRestrictionsPronunciation) + " Heoyongdoemnida\"";
     }
 }

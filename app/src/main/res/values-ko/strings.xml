@@ -26,4 +26,8 @@
     <string name="order_translation">주문 번역</string>
     <string name="food_suggestions">음식 추천</string>
     <string name="upload_picture">사진 업로드</string>
+    <string name="back_button_desc">Back</string>
+    <string name="recommendation_icon_desc">Recommendation</string>
+    <string name="korean_translation_icon_desc">Korean Translation</string>
+    <string name="pronunciation_icon_desc">Pronunciation</string>
 </resources>
