@@ -10,9 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -24,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
 
 
 import java.util.ArrayList;
@@ -34,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -322,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("%%%%","wowowowow"+REQUEST_CODE_ADD_PROFILE+"||"+resultCode+"||"+RESULT_OK);
         if (requestCode == REQUEST_CODE_ADD_PROFILE && resultCode == RESULT_OK) {
             // Reload profile preferences if a new profile has been added
-            Log.d("%%%%","wowowowow");
             loadProfilePreferences();
             setupUi();
             setupListeners();
@@ -461,14 +456,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void openEdibleActivity() {
+        Log.d("%%%%","Edible");
         Intent intent = new Intent(this, EdibleActivity.class);
-        intent.putExtra("stringA", "The ingredient satisfy your dietary preference!");
         startActivity(intent);
     }
     private void openNotEdibleActivity(List<String> the_result) {
-        Intent intent = new Intent(this, EdibleActivity.class);
-        intent.putExtra("stringA", "The ingredient does not satisfy your dietary preference!");
-        intent.putExtra("stringB", "Because the food contains : ");
+        Log.d("%%%%","Not Edible");
+        Intent intent = new Intent(this, NotEdibleActivity.class);
 
         StringBuilder translatedResult = new StringBuilder();
         for (String ingredient : the_result) {
@@ -485,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
             translatedResult.setLength(translatedResult.length() - 2);
         }
 
-        intent.putExtra("stringC", " " + translatedResult.toString());
+        intent.putExtra("stringA", " " + translatedResult.toString());
         startActivity(intent);
 
     }

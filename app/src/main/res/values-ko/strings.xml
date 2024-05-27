@@ -26,4 +26,5 @@
     <string name="order_translation">주문 번역</string>
     <string name="food_suggestions">음식 추천</string>
     <string name="upload_picture">사진 업로드</string>
+    <string name="detailed_description">상세 설명</string>
 </resources>

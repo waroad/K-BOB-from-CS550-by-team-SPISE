@@ -67,7 +67,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Detailed Description" />
+            android:text="@string/detailed_description" />
 
         <TextView
             android:id="@+id/description"
