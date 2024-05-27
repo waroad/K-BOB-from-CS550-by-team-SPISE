@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         ingredientTranslationMap.put("램고기", "lamb");
         ingredientTranslationMap.put("계란", "egg");
         ingredientTranslationMap.put("달걀", "egg");
+        ingredientTranslationMap.put("알류", "egg");
         ingredientTranslationMap.put("에그", "egg");
         ingredientTranslationMap.put("유제품", "dairy");
         ingredientTranslationMap.put("치즈", "cheese");
