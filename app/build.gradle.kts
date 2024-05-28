@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.k_bob"
+    namespace = "com.SPISE.k_bob"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.k_bob"
+        applicationId = "com.SPISE.k_bob"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
