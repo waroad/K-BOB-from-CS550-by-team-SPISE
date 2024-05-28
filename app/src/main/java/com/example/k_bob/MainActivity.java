@@ -350,19 +350,59 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private List<String> determineLegality(String result) {
+        // Extract inferred text from OCR result
         List<String> inferTexts = OcrResultParser.extractInferText(result);
         StringBuilder the_result = new StringBuilder();
         for (String text : inferTexts) {
             the_result.append(text);
         }
         Log.d("OcrResultParser", "Processing text: " + the_result.toString());
+
         List<String> contained_illegal_ingredient = new ArrayList<>();
 
-        for (String ingredient : avoidIngredients) {
-            if (the_result.toString().contains(ingredient)) {
-                contained_illegal_ingredient.add(ingredient);
+        // Convert the StringBuilder to a String
+        String fullText = the_result.toString();
+
+        // Check if "함유" is present
+        if (fullText.contains("함유")) {
+            int index = fullText.indexOf("함유");
+
+            // Extract the part of the text before "함유"
+            String beforeHamyu = fullText.substring(0, index).trim();
+
+            // Find the last occurrence of any of the specified tokens
+            int lastTokenIndex = -1;
+            String[] tokens = { ".", "알레르기", "원재료명", "외국산", "소금", "식품", "중국산", "포도당", "조절제", "추출물", "풍미", "중국", "비타민"};
+            for (String token : tokens) {
+                int tokenIndex = beforeHamyu.lastIndexOf(token);
+                if (tokenIndex > lastTokenIndex) {
+                    lastTokenIndex = tokenIndex;
+                }
+            }
+
+            // If a token is found, extract the part after the last token
+            String relevantText;
+            if (lastTokenIndex != -1) {
+                relevantText = beforeHamyu.substring(lastTokenIndex + 1).trim();
+            } else {
+                relevantText = beforeHamyu;
+            }
+            Log.d("OcrResultParser", "Processed text: " + relevantText);
+            // Check each ingredient in the relevant part
+            for (String ingredient : avoidIngredients) {
+                if (relevantText.contains(ingredient)) {
+                    contained_illegal_ingredient.add(ingredient);
+                }
             }
         }
+        else{
+            for (String ingredient : avoidIngredients) {
+                if (the_result.toString().contains(ingredient)) {
+                    contained_illegal_ingredient.add(ingredient);
+                }
+            }
+        }
+
         return contained_illegal_ingredient;
     }
     @Override
