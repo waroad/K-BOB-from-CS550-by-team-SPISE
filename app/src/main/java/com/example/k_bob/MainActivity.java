@@ -10,9 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -24,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
 
 
 import java.util.ArrayList;
@@ -34,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -322,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("%%%%","wowowowow"+REQUEST_CODE_ADD_PROFILE+"||"+resultCode+"||"+RESULT_OK);
         if (requestCode == REQUEST_CODE_ADD_PROFILE && resultCode == RESULT_OK) {
             // Reload profile preferences if a new profile has been added
-            Log.d("%%%%","wowowowow");
             loadProfilePreferences();
             setupUi();
             setupListeners();
@@ -355,19 +350,59 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private List<String> determineLegality(String result) {
+        // Extract inferred text from OCR result
         List<String> inferTexts = OcrResultParser.extractInferText(result);
         StringBuilder the_result = new StringBuilder();
         for (String text : inferTexts) {
             the_result.append(text);
         }
         Log.d("OcrResultParser", "Processing text: " + the_result.toString());
+
         List<String> contained_illegal_ingredient = new ArrayList<>();
 
-        for (String ingredient : avoidIngredients) {
-            if (the_result.toString().contains(ingredient)) {
-                contained_illegal_ingredient.add(ingredient);
+        // Convert the StringBuilder to a String
+        String fullText = the_result.toString();
+
+        // Check if "함유" is present
+        if (fullText.contains("함유")) {
+            int index = fullText.indexOf("함유");
+
+            // Extract the part of the text before "함유"
+            String beforeHamyu = fullText.substring(0, index).trim();
+
+            // Find the last occurrence of any of the specified tokens
+            int lastTokenIndex = -1;
+            String[] tokens = { ".", "알레르기", "원재료명", "외국산", "소금", "식품", "중국산", "포도당", "조절제", "추출물", "풍미", "중국", "비타민"};
+            for (String token : tokens) {
+                int tokenIndex = beforeHamyu.lastIndexOf(token);
+                if (tokenIndex > lastTokenIndex) {
+                    lastTokenIndex = tokenIndex;
+                }
+            }
+
+            // If a token is found, extract the part after the last token
+            String relevantText;
+            if (lastTokenIndex != -1) {
+                relevantText = beforeHamyu.substring(lastTokenIndex + 1).trim();
+            } else {
+                relevantText = beforeHamyu;
+            }
+            Log.d("OcrResultParser", "Processed text: " + relevantText);
+            // Check each ingredient in the relevant part
+            for (String ingredient : avoidIngredients) {
+                if (relevantText.contains(ingredient)) {
+                    contained_illegal_ingredient.add(ingredient);
+                }
             }
         }
+        else{
+            for (String ingredient : avoidIngredients) {
+                if (the_result.toString().contains(ingredient)) {
+                    contained_illegal_ingredient.add(ingredient);
+                }
+            }
+        }
+
         return contained_illegal_ingredient;
     }
     @Override
@@ -461,14 +496,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void openEdibleActivity() {
+        Log.d("%%%%","Edible");
         Intent intent = new Intent(this, EdibleActivity.class);
-        intent.putExtra("stringA", "The ingredient satisfy your dietary preference!");
         startActivity(intent);
     }
     private void openNotEdibleActivity(List<String> the_result) {
-        Intent intent = new Intent(this, EdibleActivity.class);
-        intent.putExtra("stringA", "The ingredient does not satisfy your dietary preference!");
-        intent.putExtra("stringB", "Because the food contains : ");
+        Log.d("%%%%","Not Edible");
+        Intent intent = new Intent(this, NotEdibleActivity.class);
 
         StringBuilder translatedResult = new StringBuilder();
         for (String ingredient : the_result) {
@@ -485,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
             translatedResult.setLength(translatedResult.length() - 2);
         }
 
-        intent.putExtra("stringC", " " + translatedResult.toString());
+        intent.putExtra("stringA", " " + translatedResult.toString());
         startActivity(intent);
 
     }
