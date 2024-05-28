@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-
+// hong
 public class FoodSuggestionActivity extends AppCompatActivity {
 
     private List<FoodItem> foodItemList = new ArrayList<>();
