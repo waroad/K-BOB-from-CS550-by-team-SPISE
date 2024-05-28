@@ -208,4 +208,10 @@
     <string name="chwinamul_bap_ingredients">밥, 취나물, 마늘, 간장, 참기름, 파, 고춧가루, 소금, 물, 야채 육수</string>
     <string name="chwinamul_bap_dietary_info">비건, 락토 채식주의자, 오보 채식주의자, 락토 오보 채식주의자, 폴로 채식주의자, 페스코 채식주의자</string>
     <string name="chwinamul_bap_restrictions">콩, 참깨 포함. 쇠고기, 돼지고기, 닭고기, 양고기, 조개류, 갑각류, 유제품, 계란, 땅콩, 밀, 옥수수, 글루텐, 겨자, 셀러리, 아황산염, 루핀 제외.</string>
+    <string name="detailed_description">상세 설명</string>
+    <string name="_10_major_ingredients">10가지 주요 영양성분</string>
+    <string name="permitted_vegan_type">식용 불가한 비건 타입</string>
+    <string name="press_here_to_view_restaurants_in_google_map">구글맵에서 관련 레스토랑 찾기</string>
+    <string name="food_information">음식 정보</string>
+    <string name="korean_vegan_food">Korean Vegan Food</string>
 </resources>

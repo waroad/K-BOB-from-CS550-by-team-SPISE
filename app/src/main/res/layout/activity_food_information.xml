@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Food Information"
+                android:text="@string/food_information"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Press here to view restaurants in Google Map"/>
+            android:text="@string/press_here_to_view_restaurants_in_google_map"/>
         <TextView
             android:id="@+id/description_title"
             android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="10 Major Ingredients" />
+            android:text="@string/_10_major_ingredients" />
 
         <TextView
             android:id="@+id/key_components"
@@ -99,7 +99,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Permitted Vegan Type" />
+            android:text="@string/permitted_vegan_type" />
 
         <TextView
             android:id="@+id/vegan_type"
@@ -115,7 +115,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Dietary Restrictions" />
+            android:text="@string/dietary_restrictions" />
 
         <TextView
             android:id="@+id/dietary_restrictions"

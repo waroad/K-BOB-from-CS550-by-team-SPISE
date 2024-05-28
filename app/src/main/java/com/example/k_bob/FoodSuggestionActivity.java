@@ -236,7 +236,7 @@ public class FoodSuggestionActivity extends AppCompatActivity {
         ));
     }
 
-        private void showDeleteConfirmationDialog(FoodItem foodItem) {
+    private void showDeleteConfirmationDialog(FoodItem foodItem) {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Food")
                 .setMessage("Are you sure you want to delete " + foodItem.getName() + "?")

@@ -27,10 +27,6 @@ public class OrderTranslationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_translation);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         currentProfileId = preferences.getString(ACTIVE_PROFILE, "");
 
@@ -219,20 +215,16 @@ public class OrderTranslationActivity extends AppCompatActivity {
         }
 
         String translation = String.format(Locale.getDefault(),
-                "Based on your dietary preferences (%s), we recommend you say:\n\"Please eliminate %s if they are included in the ingredients. However, %s are acceptable.\"\n\n",
-                veganType,
-                avoidIngredientsStr.toString(),
-                unrestrictedIngredientsStr.toString());
+                "In English:\n\"Please eliminate %s if they are included in the ingredients.\"\n\n",
+                avoidIngredientsStr.toString());
 
         String koreanTranslation = String.format(Locale.getDefault(),
-                "In Korean:\n\"만약 %s이 재료에 포함되어 있다면 제거해주세요. 단, %s은 허용됩니다.\"\n\n",
-                avoidIngredientsKorean.toString(),
-                unrestrictedIngredientsKorean.toString());
+                "In Korean:\n\"혹시 %s이 재료에 포함되어 있다면 빼주세요\"\n",
+                avoidIngredientsKorean.toString());
 
         String pronunciationTranslation = String.format(Locale.getDefault(),
-                "In speaking:\n\"Manyak %s Jaeryoe Pohamdoeeo Itda-myeon, Geugeotdeureul Jegeohaseyo. %s Heoyongdoemnida\"",
-                avoidIngredientsPronunciation.toString(),
-                unrestrictedIngredientsPronunciation.toString());
+                "In speaking:\n\"Hoksi %s Jaeryoe Pohamdoeeo Itda-myeon, BBaejuseyo\"",
+                avoidIngredientsPronunciation.toString());
 
         translationTextView.setText(translation);
         translationTextKoreanView.setText(koreanTranslation);

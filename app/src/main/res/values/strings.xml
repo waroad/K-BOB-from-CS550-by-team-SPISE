@@ -208,4 +208,10 @@
     <string name="chwinamul_bap_ingredients">Rice, aster leaves, garlic, soy sauce, sesame oil, scallions, chili flakes, salt, water, vegetable broth</string>
     <string name="chwinamul_bap_dietary_info">Vegan, Lacto-vegetarian, Ovo-vegetarian, Lacto-ovo-vegetarian, Pollo-vegetarian, Pesco-vegetarian</string>
     <string name="chwinamul_bap_restrictions">Contains soy, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, eggs, peanuts, wheat, corn, gluten, mustard, celery, sulfites, lupin.</string>
+    <string name="detailed_description">Detailed description</string>
+    <string name="_10_major_ingredients">10 Major Ingredients</string>
+    <string name="permitted_vegan_type">Permitted Vegan Type</string>
+    <string name="press_here_to_view_restaurants_in_google_map">Press here to view restaurants in Google Map</string>
+    <string name="food_information">Food Information</string>
+    <string name="korean_vegan_food">Korean Vegan Food</string>
 </resources>
