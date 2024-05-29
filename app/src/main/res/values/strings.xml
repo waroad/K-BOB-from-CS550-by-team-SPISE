@@ -214,4 +214,5 @@
     <string name="press_here_to_view_restaurants_in_google_map">Press here to view restaurants in Google Map</string>
     <string name="food_information">Food Information</string>
     <string name="korean_vegan_food">Korean Vegan Food</string>
+    <string name="custom">Custom</string>
 </resources>

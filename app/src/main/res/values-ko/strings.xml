@@ -214,4 +214,5 @@
     <string name="press_here_to_view_restaurants_in_google_map">구글맵에서 관련 레스토랑 찾기</string>
     <string name="food_information">음식 정보</string>
     <string name="korean_vegan_food">한국 비건 음식</string>
+    <string name="custom">Custom</string>
 </resources>

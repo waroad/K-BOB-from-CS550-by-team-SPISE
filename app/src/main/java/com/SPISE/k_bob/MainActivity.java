@@ -334,6 +334,8 @@ public class MainActivity extends AppCompatActivity {
                         List<String> the_result = determineLegality(result);
                         if (the_result.isEmpty())
                             openEdibleActivity();
+                        else if(the_result.toString().equals("[False1]"))
+                            openNotDetectedActivity();
                         else
                             openNotEdibleActivity(the_result);
                     }
@@ -396,11 +398,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            for (String ingredient : avoidIngredients) {
-                if (the_result.toString().contains(ingredient)) {
-                    contained_illegal_ingredient.add(ingredient);
-                }
-            }
+            Log.d("wwwwww","flflfll");
+            contained_illegal_ingredient.add("False1");
         }
 
         return contained_illegal_ingredient;
@@ -416,6 +415,14 @@ public class MainActivity extends AppCompatActivity {
         }
         setupUi();
         setupListeners();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadProfilePreferences();
+        loadUserPreferences();
     }
 
     private File uriToFile(Uri imageUri) {
@@ -498,6 +505,11 @@ public class MainActivity extends AppCompatActivity {
     private void openEdibleActivity() {
         Log.d("%%%%","Edible");
         Intent intent = new Intent(this, EdibleActivity.class);
+        startActivity(intent);
+    }
+    private void openNotDetectedActivity() {
+        Log.d("%%%%","NotDetected");
+        Intent intent = new Intent(this, NotDetectedActivity.class);
         startActivity(intent);
     }
     private void openNotEdibleActivity(List<String> the_result) {

@@ -21,7 +21,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private static final String ACTIVE_PROFILE = "active_profile";
     private EditText nameInput;
     private CheckBox checkBeef, checkPork, checkShellfish, checkFish, checkPeanut, checkChicken, checkLamb, checkEgg, checkDairy, checkFlour, checkTreeNuts, checkSoy, checkSesame, checkWheat, checkCorn, checkGluten, checkMustard, checkCelery, checkSulfites, checkLupin;
-    private CheckBox checkPreference1, checkPreference2, checkPreference3, checkPreference4, checkPreference5, checkPreference6;
+    private CheckBox checkPreference1, checkPreference2, checkPreference3, checkPreference4, checkPreference5, checkPreference6, checkPreference7, checkAll;
     private String activeProfileId;
 
     @Override
@@ -59,6 +59,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         checkPreference4 = findViewById(R.id.check_preference_4);
         checkPreference5 = findViewById(R.id.check_preference_5);
         checkPreference6 = findViewById(R.id.check_preference_6);
+        checkPreference7 = findViewById(R.id.check_preference_7);
+        checkAll = findViewById(R.id.check_select_all);
 
         // Load the active profile data
         if (Objects.equals(intent.getStringExtra("add"), "False"))
@@ -92,12 +94,14 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
         // Set the name field and checkboxes according to the active profile
         nameInput.setText(activeProfileName);
+        checkAll.setChecked(false);
         checkPreference1.setChecked(preferences.getBoolean(activeProfileId + "_is_vegan", false));
         checkPreference2.setChecked(preferences.getBoolean(activeProfileId + "_is_lacto", false));
         checkPreference3.setChecked(preferences.getBoolean(activeProfileId + "_is_ovo", false));
         checkPreference4.setChecked(preferences.getBoolean(activeProfileId + "_is_lacto-ovo", false));
         checkPreference5.setChecked(preferences.getBoolean(activeProfileId + "_is_pollotarian", false));
         checkPreference6.setChecked(preferences.getBoolean(activeProfileId + "_is_pescatarian", false));
+        checkPreference7.setChecked(preferences.getBoolean(activeProfileId + "_is_custom", false));
         checkBeef.setChecked(preferences.getBoolean(activeProfileId + "_avoid_beef", false));
         checkPork.setChecked(preferences.getBoolean(activeProfileId + "_avoid_pork", false));
         checkShellfish.setChecked(preferences.getBoolean(activeProfileId + "_avoid_shellfish", false));
@@ -122,6 +126,13 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
     // Set up listeners for additional preferences
     private void setupPreferenceListeners() {
+
+        CompoundButton.OnCheckedChangeListener selectAllListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                handleSelectAll(isChecked);
+            }
+        };
         CompoundButton.OnCheckedChangeListener preferenceListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -132,26 +143,147 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             }
         };
 
+        CompoundButton.OnCheckedChangeListener dietaryListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    handleDietaryPreferenceUncheck(buttonView.getId());
+                }
+            }
+        };
+        checkAll.setOnCheckedChangeListener(selectAllListener);
+        attachPreferenceListeners(preferenceListener, dietaryListener);
+    }
+    private void attachPreferenceListeners(CompoundButton.OnCheckedChangeListener preferenceListener, CompoundButton.OnCheckedChangeListener dietaryListener) {
         checkPreference1.setOnCheckedChangeListener(preferenceListener);
         checkPreference2.setOnCheckedChangeListener(preferenceListener);
         checkPreference3.setOnCheckedChangeListener(preferenceListener);
         checkPreference4.setOnCheckedChangeListener(preferenceListener);
         checkPreference5.setOnCheckedChangeListener(preferenceListener);
         checkPreference6.setOnCheckedChangeListener(preferenceListener);
+        checkPreference7.setOnCheckedChangeListener(preferenceListener);
+
+        checkBeef.setOnCheckedChangeListener(dietaryListener);
+        checkPork.setOnCheckedChangeListener(dietaryListener);
+        checkShellfish.setOnCheckedChangeListener(dietaryListener);
+        checkFish.setOnCheckedChangeListener(dietaryListener);
+        checkChicken.setOnCheckedChangeListener(dietaryListener);
+        checkLamb.setOnCheckedChangeListener(dietaryListener);
+        checkEgg.setOnCheckedChangeListener(dietaryListener);
+        checkDairy.setOnCheckedChangeListener(dietaryListener);
     }
 
+    private void detachPreferenceListeners() {
+        checkPreference1.setOnCheckedChangeListener(null);
+        checkPreference2.setOnCheckedChangeListener(null);
+        checkPreference3.setOnCheckedChangeListener(null);
+        checkPreference4.setOnCheckedChangeListener(null);
+        checkPreference5.setOnCheckedChangeListener(null);
+        checkPreference6.setOnCheckedChangeListener(null);
+        checkPreference7.setOnCheckedChangeListener(null);
+
+        checkBeef.setOnCheckedChangeListener(null);
+        checkPork.setOnCheckedChangeListener(null);
+        checkShellfish.setOnCheckedChangeListener(null);
+        checkFish.setOnCheckedChangeListener(null);
+        checkChicken.setOnCheckedChangeListener(null);
+        checkLamb.setOnCheckedChangeListener(null);
+        checkEgg.setOnCheckedChangeListener(null);
+        checkDairy.setOnCheckedChangeListener(null);
+    }
+
+    private void handleSelectAll(boolean checkedId) {
+        detachPreferenceListeners();
+        checkPreference7.setChecked(true);
+        if(!checkedId){
+            checkPreference1.setChecked(false);
+            checkPreference2.setChecked(false);
+            checkPreference3.setChecked(false);
+            checkPreference4.setChecked(false);
+            checkPreference5.setChecked(false);
+            checkPreference6.setChecked(false);
+            checkBeef.setChecked(false);
+            checkPork.setChecked(false);
+            checkShellfish.setChecked(false);
+            checkFish.setChecked(false);
+            checkPeanut.setChecked(false);
+            checkChicken.setChecked(false);
+            checkLamb.setChecked(false);
+            checkEgg.setChecked(false);
+            checkDairy.setChecked(false);
+            checkFlour.setChecked(false);
+            checkTreeNuts.setChecked(false);
+            checkSoy.setChecked(false);
+            checkSesame.setChecked(false);
+            checkWheat.setChecked(false);
+            checkCorn.setChecked(false);
+            checkGluten.setChecked(false);
+            checkMustard.setChecked(false);
+            checkCelery.setChecked(false);
+            checkSulfites.setChecked(false);
+            checkLupin.setChecked(false);
+        }
+        else{
+            checkPreference1.setChecked(false);
+            checkPreference2.setChecked(false);
+            checkPreference3.setChecked(false);
+            checkPreference4.setChecked(false);
+            checkPreference5.setChecked(false);
+            checkPreference6.setChecked(false);
+            checkBeef.setChecked(true);
+            checkPork.setChecked(true);
+            checkShellfish.setChecked(true);
+            checkFish.setChecked(true);
+            checkPeanut.setChecked(true);
+            checkChicken.setChecked(true);
+            checkLamb.setChecked(true);
+            checkEgg.setChecked(true);
+            checkDairy.setChecked(true);
+            checkFlour.setChecked(true);
+            checkTreeNuts.setChecked(true);
+            checkSoy.setChecked(true);
+            checkSesame.setChecked(true);
+            checkWheat.setChecked(true);
+            checkCorn.setChecked(true);
+            checkGluten.setChecked(true);
+            checkMustard.setChecked(true);
+            checkCelery.setChecked(true);
+            checkSulfites.setChecked(true);
+            checkLupin.setChecked(true);
+        }
+
+        attachPreferenceListeners(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    uncheckOtherPreferences(buttonView.getId());
+                    applyPreferenceRestrictions(buttonView.getId());
+                }
+            }
+        }, new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    handleDietaryPreferenceUncheck(buttonView.getId());
+                }
+            }
+        });
+    }
     // Uncheck other preferences when one is checked
     private void uncheckOtherPreferences(int checkedId) {
+        Log.d("kkkk","tt "+checkedId+ "  "+R.id.check_preference_1);
         if (checkedId != R.id.check_preference_1) checkPreference1.setChecked(false);
         if (checkedId != R.id.check_preference_2) checkPreference2.setChecked(false);
         if (checkedId != R.id.check_preference_3) checkPreference3.setChecked(false);
         if (checkedId != R.id.check_preference_4) checkPreference4.setChecked(false);
         if (checkedId != R.id.check_preference_5) checkPreference5.setChecked(false);
         if (checkedId != R.id.check_preference_6) checkPreference6.setChecked(false);
+        if (checkedId != R.id.check_preference_7) checkPreference7.setChecked(false);
     }
 
     // Apply dietary restrictions based on selected preference
     private void applyPreferenceRestrictions(int checkedId) {
+        detachPreferenceListeners();
         if (checkedId == R.id.check_preference_1) {
             checkBeef.setChecked(true);
             checkPork.setChecked(true);
@@ -207,20 +339,30 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             checkDairy.setChecked(false);
             checkEgg.setChecked(false);
         }
-        checkPeanut.setChecked(false);
-        checkFlour.setChecked(false);
-        checkTreeNuts.setChecked(false);
-        checkSoy.setChecked(false);
-        checkSesame.setChecked(false);
-        checkWheat.setChecked(false);
-        checkCorn.setChecked(false);
-        checkGluten.setChecked(false);
-        checkMustard.setChecked(false);
-        checkCelery.setChecked(false);
-        checkSulfites.setChecked(false);
-        checkLupin.setChecked(false);
-    }
 
+        attachPreferenceListeners(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    uncheckOtherPreferences(buttonView.getId());
+                    applyPreferenceRestrictions(buttonView.getId());
+                }
+            }
+        }, new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    handleDietaryPreferenceUncheck(buttonView.getId());
+                }
+            }
+        });
+    }
+    private void handleDietaryPreferenceUncheck(int uncheckedId) {
+        // Add logic to handle dietary preference uncheck events
+        // Example: Log the unchecked event or perform some action
+        uncheckOtherPreferences(uncheckedId);
+        checkPreference7.setChecked(true);
+    }
     // Save updated preferences for the active profile
     private void savePreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -253,6 +395,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         prefsEditor.putBoolean(activeProfileId + "_is_lacto-ovo", checkPreference4.isChecked());
         prefsEditor.putBoolean(activeProfileId + "_is_pollotarian", checkPreference5.isChecked());
         prefsEditor.putBoolean(activeProfileId + "_is_pescatarian", checkPreference6.isChecked());
+        prefsEditor.putBoolean(activeProfileId + "_is_custom", checkPreference7.isChecked());
         prefsEditor.putBoolean(activeProfileId + "_avoid_beef", checkBeef.isChecked());
         prefsEditor.putBoolean(activeProfileId + "_avoid_pork", checkPork.isChecked());
         prefsEditor.putBoolean(activeProfileId + "_avoid_shellfish", checkShellfish.isChecked());

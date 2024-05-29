@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/vegan_type"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:layout_marginTop="16dp"
             android:padding="8dp" />
 
@@ -29,47 +29,70 @@
             android:id="@+id/check_preference_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/vegan" />
 
         <CheckBox
             android:id="@+id/check_preference_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/lacto" />
 
         <CheckBox
             android:id="@+id/check_preference_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/ovo" />
 
         <CheckBox
             android:id="@+id/check_preference_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/lacto_ovo" />
 
         <CheckBox
             android:id="@+id/check_preference_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/pollotarian" />
 
         <CheckBox
             android:id="@+id/check_preference_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/pescatarian" />
 
+        <CheckBox
+            android:id="@+id/check_preference_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/custom" />
         <!-- Title for Dietary Restrictions -->
-        <TextView
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dietary_restrictions"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:padding="8dp" />
+            android:columnCount="2">
+        <TextView
+                android:layout_height="wrap_content"
+                android:text="@string/dietary_restrictions"
+                android:textSize="20sp"
+                android:layout_marginTop="16dp"
+                android:padding="8dp" />
+            <CheckBox
+                android:id="@+id/check_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="All" />
 
+        </GridLayout>
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
