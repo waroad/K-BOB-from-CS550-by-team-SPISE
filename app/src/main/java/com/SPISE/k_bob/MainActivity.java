@@ -259,16 +259,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupListeners() {
         // Set up the click listener for the Upload Picture icon
-        findViewById(R.id.uploadPicture).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.uploadPicture1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGallery();
             }
         });
-
-        // Initialize the settings button for profile management (using fragment navigation)
-        ImageView settingsButton = findViewById(R.id.setting); // Changed to ImageView
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setting1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -286,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set up the click listener for the Food Suggestion icon
-        findViewById(R.id.foodSuggestion).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.foodSuggestion1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, FoodSuggestionActivity.class));
@@ -294,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set up the click listener for the Order Translation icon
-        findViewById(R.id.orderTranslation).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.orderTranslation1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrderTranslationActivity.class);
