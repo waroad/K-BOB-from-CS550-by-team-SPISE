@@ -11,12 +11,12 @@ public class EdibleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edible);
 
-        // Retrieve the strings from the intent
-        String stringA = getIntent().getStringExtra("stringA");
-
-        // Find the TextViews and set the strings
-        TextView textViewA = findViewById(R.id.text_view_a);
-
-        textViewA.setText(stringA);
+//        // Retrieve the strings from the intent
+//        String stringA = getIntent().getStringExtra("stringA");
+//
+//        // Find the TextViews and set the strings
+//        TextView textViewA = findViewById(R.id.text_view_a);
+//
+//        textViewA.setText(stringA);
     }
 }

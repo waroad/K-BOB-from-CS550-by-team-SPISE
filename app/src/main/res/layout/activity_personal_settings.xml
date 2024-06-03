@@ -168,7 +168,7 @@
                 android:id="@+id/check_soy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Soy (대두)" />
+                android:text="Soy sauce(간장)" />
 
             <CheckBox
                 android:id="@+id/check_sesame"
