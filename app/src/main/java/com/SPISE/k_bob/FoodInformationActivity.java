@@ -3,10 +3,11 @@ package com.SPISE.k_bob;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class FoodInformationActivity extends AppCompatActivity {
 
@@ -22,12 +23,17 @@ public class FoodInformationActivity extends AppCompatActivity {
         String veganType = getIntent().getStringExtra("veganType");
         String dietaryRestrictions = getIntent().getStringExtra("dietaryRestrictions");
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         ImageView foodImageView = findViewById(R.id.food_image);
         TextView foodNameTextView = findViewById(R.id.food_name);
-        TextView descriptionTextView = findViewById(R.id.description);
-        TextView keyComponentsTextView = findViewById(R.id.key_components);
-        TextView veganTypeTextView = findViewById(R.id.vegan_type);
-        TextView dietaryRestrictionsTextView = findViewById(R.id.dietary_restrictions);
+        TextView descriptionTextView = findViewById(R.id.description_text);
+        TextView keyComponentsTextView = findViewById(R.id.major_ingredients_text);
+        TextView veganTypeTextView = findViewById(R.id.vegan_type_text);
+        TextView dietaryRestrictionsTextView = findViewById(R.id.dietary_restrictions_text);
+        Button viewInMapButton = findViewById(R.id.view_restaurants_button);
 
         foodImageView.setImageResource(foodImageResId);
         foodNameTextView.setText(foodName);
@@ -36,9 +42,7 @@ public class FoodInformationActivity extends AppCompatActivity {
         veganTypeTextView.setText(veganType);
         dietaryRestrictionsTextView.setText(dietaryRestrictions);
 
-        findViewById(R.id.back_icon).setOnClickListener(v -> finish());
-
-        findViewById(R.id.view_in_map).setOnClickListener(v -> {
+        viewInMapButton.setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(foodName + " restaurant"));
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");

@@ -37,6 +37,8 @@
     <string name="recommendation_icon_desc">Recommendation</string>
     <string name="korean_translation_icon_desc">Korean Translation</string>
     <string name="pronunciation_icon_desc">Pronunciation</string>
+    <string name="view_restaurants_in_maps">Press here to view restaurants in Google Map</string>
+    <string name="food_image_desc">Food Image</string>
 
     <!-- Strings for Japchae -->
     <string name="japchae_name">Japchae</string>

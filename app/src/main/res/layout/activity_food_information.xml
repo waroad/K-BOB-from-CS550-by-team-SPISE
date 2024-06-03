@@ -1,127 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".FoodInformationActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/food_information" />
+
+    <ImageView
+        android:id="@+id/food_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/food_image_desc"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample_food_image" />
+
+    <TextView
+        android:id="@+id/food_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:text="Kongguksu"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+    <Button
+        android:id="@+id/view_restaurants_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/view_restaurants_in_maps"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:padding="12dp" />
 
-            <ImageView
-                android:id="@+id/back_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:padding="16dp" />
+    <TextView
+        android:id="@+id/detailed_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Detailed description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="A refreshing cold noodle soup made with soy milk, typically garnished with cucumber and sometimes sesame seeds."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+    <TextView
+        android:id="@+id/major_ingredients_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="10 Major Ingredients"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/food_information"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/major_ingredients_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Soy milk, wheat noodles, cucumber, sesame seeds, salt, soy sauce, scallions, garlic, vinegar, ice cubes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <ImageView
-            android:id="@+id/food_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/vegan_type_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Permitted Vegan Type"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/food_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/vegan_type_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Vegan, Lacto-vegetarian, Ovo-vegetarian, Lacto-ovo-vegetarian, Pollo-vegetarian, Pesco-vegetarian"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <TextView
-            android:id="@+id/view_in_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:text="@string/press_here_to_view_restaurants_in_google_map"/>
-        <TextView
-            android:id="@+id/description_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:text="@string/detailed_description" />
+    <TextView
+        android:id="@+id/dietary_restrictions_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Dietary Restrictions"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
+    <TextView
+        android:id="@+id/dietary_restrictions_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Contains soy, wheat, sesame. Free from beef, pork, chicken, lamb, shellfish, crustaceans, dairy, peanuts, corn, gluten, mustard, celery, sulfites, lupin."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <TextView
-            android:id="@+id/key_components_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:text="@string/_10_major_ingredients" />
-
-        <TextView
-            android:id="@+id/key_components"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
-
-        <TextView
-            android:id="@+id/vegan_type_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:text="@string/permitted_vegan_type" />
-
-        <TextView
-            android:id="@+id/vegan_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
-
-        <TextView
-            android:id="@+id/dietary_restrictions_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:text="@string/dietary_restrictions" />
-
-        <TextView
-            android:id="@+id/dietary_restrictions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
