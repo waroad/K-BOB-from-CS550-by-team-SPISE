@@ -38,6 +38,11 @@
     <string name="bibimbap_dietary_info">비건, 락토 채식주의자, 오보 채식주의자, 락토 오보 채식주의자, 폴로 채식주의자, 페스코 채식주의자</string>
     <string name="bibimbap_restrictions">참깨, 콩 포함. 쇠고기, 돼지고기, 닭고기, 양고기, 조개류, 갑각류, 유제품, 땅콩, 밀, 옥수수, 글루텐, 겨자, 셀러리, 아황산염, 루핀 제외. 계란 포함 가능.</string>
     <string name="view_restaurants_in_maps">구글 지도에서 레스토랑 보기.</string>
+    <string name="food_suggestions_icon_desc">Food Suggestions Icon</string>
+    <string name="settings_icon_desc">Settings Icon</string>
+    <string name="upload_picture_icon_desc">Upload Picture Icon</string>
+    <string name="order_translation_icon_desc">Order Translation Icon</string>
+    <string name="food_image_desc">음식 사진</string>
 
     <!-- Strings for Japchae -->
     <string name="japchae_name">잡채</string>

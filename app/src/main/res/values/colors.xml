@@ -12,5 +12,8 @@
     <color name="colorOnSecondary">#000000</color> <!-- Black -->
     <color name="colorPrimaryDark">#388E3C</color> <!-- Example Primary Dark Color -->
     <color name="colorAccent">#FFC107</color>
+    <color name="background_color">#F3F3F3</color>
+    <color name="grid_background_color">#FFFFFF</color>
+    <color name="text_color_secondary">#666666</color>
 
 </resources>

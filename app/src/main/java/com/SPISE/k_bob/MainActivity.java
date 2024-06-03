@@ -1,8 +1,6 @@
 // MainActivity.java
 package com.SPISE.k_bob;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,11 +8,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -23,14 +19,15 @@ import androidx.fragment.app.FragmentManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -43,6 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import android.app.ProgressDialog;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
@@ -269,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Initialize the settings button for profile management (using fragment navigation)
-        ImageButton settingsButton = findViewById(R.id.setting);
+        ImageView settingsButton = findViewById(R.id.setting); // Changed to ImageView
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -325,6 +323,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             File imageFile = uriToFile(imageUri);
+            setTheme(R.style.AppTheme); // Switch to the main theme immediately after the splash screen
+            ProgressDialog progressDialog = ProgressDialog.show(this, "Processing", "OCR in progress...", true);
             if (imageFile != null && imageFile.exists()) {
                 performOcrRequest(imageFile, new OcrResultCallback() {
                     @Override
@@ -332,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, "Success: " + result, Toast.LENGTH_LONG).show();
                         //Log.d("OCR_SUCCESS", "OCR Result~: " + result);
                         List<String> the_result = determineLegality(result);
+                        progressDialog.dismiss();
                         if (the_result.isEmpty())
                             openEdibleActivity();
                         else if(the_result.toString().equals("[False1]"))
@@ -440,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } catch (IOException e) {
-            Log.e(TAG, "Error writing temp file", e);
+            Log.e("TAG", "Error writing temp file", e);
         }
         return tempFile;
     }

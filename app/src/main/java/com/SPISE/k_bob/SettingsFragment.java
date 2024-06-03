@@ -1,6 +1,5 @@
 package com.SPISE.k_bob;
 
-// SettingsFragment.java
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,25 +7,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-
-import org.intellij.lang.annotations.Language;
 
 public class SettingsFragment extends Fragment {
     private static final String PREFS_NAME = "profiles_preferences";
     private static final String ALL_PROFILES_PREFS = "all_profiles";
     private static final String ACTIVE_PROFILE = "active_profile";
     private static final String DARK_MODE_PREF = "dark_mode";
-    private TextView profileNameText;
     private static final String PREFS_NAME1 = "language_preferences";
     private static final String LANGUAGE_KEY = "language";
-
+    private TextView profileNameText;
 
     @Nullable
     @Override
@@ -46,59 +41,45 @@ public class SettingsFragment extends Fragment {
         profileNameText.setText("Current Profile: " + currentProfileName);
 
         // Initialize buttons
-        Button manageProfileButton = view.findViewById(R.id.button_manage_profile);
-        Button personalSettingsButton = view.findViewById(R.id.button_personal_settings);
-        Button darkModeButton = view.findViewById(R.id.button_dark_mode);
-        Button languageButton = view.findViewById(R.id.button_language);
+        LinearLayout manageProfileButton = view.findViewById(R.id.button_manage_profile);
+        LinearLayout personalSettingsButton = view.findViewById(R.id.button_personal_settings);
+        LinearLayout darkModeButton = view.findViewById(R.id.button_dark_mode);
+        LinearLayout languageButton = view.findViewById(R.id.button_language);
 
         // Manage Profile
-        manageProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManageProfileActivity.class);
-                startActivity(intent);
-            }
+        manageProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ManageProfileActivity.class);
+            startActivity(intent);
         });
 
         // Personal Settings
-        personalSettingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the PersonalSettingsActivity
-                Intent intent = new Intent(getActivity(), PersonalSettingsActivity.class);
-                intent.putExtra("add", "False");
-                startActivity(intent);
-            }
+        personalSettingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PersonalSettingsActivity.class);
+            intent.putExtra("add", "False");
+            startActivity(intent);
         });
 
         // Enable Dark Mode
-        darkModeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Toggle dark mode functionality
-                boolean isDarkMode = preferences.getBoolean(DARK_MODE_PREF, false);
-                SharedPreferences.Editor editor = preferences.edit();
-                if (isDarkMode) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor.putBoolean(DARK_MODE_PREF, false);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putBoolean(DARK_MODE_PREF, true);
-                }
-                editor.apply();
+        darkModeButton.setOnClickListener(v -> {
+            // Toggle dark mode functionality
+            boolean isDarkMode = preferences.getBoolean(DARK_MODE_PREF, false);
+            SharedPreferences.Editor editor = preferences.edit();
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putBoolean(DARK_MODE_PREF, false);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putBoolean(DARK_MODE_PREF, true);
             }
+            editor.apply();
         });
 
         // Change Language
-        languageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleLanguage();
-            }
-        });
+        languageButton.setOnClickListener(v -> toggleLanguage());
 
         return view;
     }
+
     private void toggleLanguage() {
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFS_NAME1, Context.MODE_PRIVATE);
         String currentLanguage = preferences.getString(LANGUAGE_KEY, "en"); // Default to English
@@ -111,6 +92,7 @@ public class SettingsFragment extends Fragment {
         LocaleHelper.setLocale(getActivity(), newLanguage);
         getActivity().recreate(); // Recreate the current activity to reflect the language change
     }
+
     @Override
     public void onResume() {
         super.onResume();

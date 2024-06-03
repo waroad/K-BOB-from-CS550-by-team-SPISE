@@ -51,6 +51,15 @@
         android:paddingEnd="50dp"
         android:drawablePadding="8dp" />
 
+    <TextView
+        android:id="@+id/text_view_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:text="A"
+        android:textSize="18sp"
+        android:padding="8dp" />
 
     <View
         android:layout_width="match_parent"

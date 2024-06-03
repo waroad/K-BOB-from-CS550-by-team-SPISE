@@ -38,6 +38,10 @@
     <string name="korean_translation_icon_desc">Korean Translation</string>
     <string name="pronunciation_icon_desc">Pronunciation</string>
     <string name="view_restaurants_in_maps">Press here to view restaurants in Google Map</string>
+    <string name="food_suggestions_icon_desc">Food Suggestions Icon</string>
+    <string name="settings_icon_desc">Settings Icon</string>
+    <string name="upload_picture_icon_desc">Upload Picture Icon</string>
+    <string name="order_translation_icon_desc">Order Translation Icon</string>
     <string name="food_image_desc">Food Image</string>
 
     <!-- Strings for Japchae -->
